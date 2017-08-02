@@ -1,4 +1,4 @@
-/// @description
+/// @description Player Movement and Collisions
 
 // Get Player Input
 key_left = keyboard_check(ord("A"));
@@ -15,13 +15,19 @@ if(is_attacking)
 // Calculate Movement
 var move = key_right - key_left;
 
-hsp = move * walksp;
+if move != 0 {
+	hsp += move*accel;
+	hsp = clamp(hsp, -walksp, walksp);
+} else {
+	hsp = lerp(hsp, 0, frict);
+}
 
 vsp = vsp + grv;
 
+// Jumping
 if (place_meeting(x,y+1,oWall)) && (key_jump)
 {
-	vsp = -9;
+	vsp = -15;
 }
 
 // Horizontal Collision

@@ -1,5 +1,4 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description Stop Attacking
 if(sprite_index == sPlayerA)
 {
 	is_attacking = false;
