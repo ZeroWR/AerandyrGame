@@ -2,6 +2,6 @@
 
 hsp = 0;
 vsp = 0;
-grv = 0.3;
-walksp = 4; 
+grv = 0.4;
+walksp = 6; 
 is_attacking = false;
