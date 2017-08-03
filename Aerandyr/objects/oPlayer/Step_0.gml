@@ -94,4 +94,9 @@ else
 
 if (hsp != 0) image_xscale = sign(hsp);
 
+if (hsp != 0) && (vsp = 0) && (is_attacking = false)
+{
+	sprite_index = sPlayerR;
+}
+
 
