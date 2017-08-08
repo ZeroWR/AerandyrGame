@@ -5,4 +5,4 @@ if(sprite_index == sPlayerA)
 	show_debug_message("Attack End");
 }
 
-show_debug_message("Animation end");
+//show_debug_message("Animation end");
