@@ -12,3 +12,9 @@ is_wall_sliding = false;
 
 //Constants
 sliding_gravity = grv / 3.0;
+
+//Debug variables
+last_weapon_coll_x1 = undefined;
+last_weapon_coll_y1 = undefined;
+last_weapon_coll_x2 = undefined;
+last_weapon_coll_y2 = undefined;

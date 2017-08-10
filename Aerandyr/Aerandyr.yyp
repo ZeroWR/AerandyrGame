@@ -47,6 +47,14 @@
             }
         },
         {
+            "Key": "224f5cbe-88ee-4f06-8e6b-2c54b45be6d9",
+            "Value": {
+                "id": "a361c118-d8be-4cde-9911-db250c1c7751",
+                "resourcePath": "objects\\oTestEnemy\\oTestEnemy.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "278f0440-59bc-44af-8299-ecbaf71a4a92",
             "Value": {
                 "id": "9790625c-d445-455d-9269-db8ae81fb9b6",
@@ -87,6 +95,14 @@
             }
         },
         {
+            "Key": "40d8c576-39a2-4c40-83f8-0fc7d3189b33",
+            "Value": {
+                "id": "a5daafb7-2ee8-4361-8fbf-a3ffb8b4f19f",
+                "resourcePath": "scripts\\OnEnemyKilled\\OnEnemyKilled.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "55dd7c36-95b7-440c-9489-fa1199efea77",
             "Value": {
                 "id": "44f3b718-5429-4927-95af-4033370afe69",
@@ -100,6 +116,14 @@
                 "id": "273f05e4-9ea9-4d11-aa50-0d87ebd03b7a",
                 "resourcePath": "views\\569fafc0-3d1f-4b36-b224-c73ae3cea5dc.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "5a9e4835-0d66-42bf-b5ca-25830c6af647",
+            "Value": {
+                "id": "96d32103-c12c-4499-a73b-7811dcb8b19b",
+                "resourcePath": "rooms\\JohnathanTest\\JohnathanTest.yy",
+                "resourceType": "GMRoom"
             }
         },
         {
@@ -124,6 +148,14 @@
                 "id": "19e67a8a-de73-4e89-853d-e6ca84544585",
                 "resourcePath": "views\\82712fe1-ab61-4462-b7de-a891aeb3278e.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "92a43ec0-ca36-4031-bc16-f350a89aee99",
+            "Value": {
+                "id": "f65f78b4-1144-4e06-bb2e-db652ad5c43f",
+                "resourcePath": "scripts\\OnEnemyHit\\OnEnemyHit.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -256,7 +288,8 @@
         }
     ],
     "script_order": [
-        
+        "92a43ec0-ca36-4031-bc16-f350a89aee99",
+        "40d8c576-39a2-4c40-83f8-0fc7d3189b33"
     ],
     "tutorial": ""
 }
