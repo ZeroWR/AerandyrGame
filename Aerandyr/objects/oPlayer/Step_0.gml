@@ -22,14 +22,27 @@ if move != 0 {
 	hsp = lerp(hsp, 0, frict);
 }
 
-vsp = vsp + grv;
+vsp = vsp + ((is_wall_sliding) ? sliding_gravity : grv);
 
 // Jumping
-if (place_meeting(x,y+1,oWall)) && (key_jump)
+if 
+(
+	(key_jump) &&
+	(
+		place_meeting(x,y+1,oWall) ||
+		(is_wall_sliding)
+	)
+)
 {
 	vsp = -15;
+	if(is_wall_sliding)
+	{
+		//Jump away from the wall
+		hsp -= (15 * move);
+	}
 }
 
+horizontal_collision = false;
 // Horizontal Collision
 if (place_meeting(x+hsp,y,oWall))
 {
@@ -38,10 +51,12 @@ if (place_meeting(x+hsp,y,oWall))
 		x = x + sign(hsp);
 	}
 	hsp = 0;
+	horizontal_collision = true;
 }
 
 x = x + hsp;
 
+vertical_collision = false;
 // Vertical Collision
 if (place_meeting(x,y+vsp,oWall))
 {
@@ -50,7 +65,10 @@ if (place_meeting(x,y+vsp,oWall))
 		y = y + sign(vsp);
 	}
 	vsp = 0;
+	vertical_collision = true;
 }
+
+is_wall_sliding = (horizontal_collision == true && vertical_collision == false && vsp > 0.0);
 
 y = y + vsp;
 
