@@ -6,4 +6,4 @@ if(last_weapon_coll_x1 != undefined)
 	draw_rectangle_color(last_weapon_coll_x1, last_weapon_coll_y1, last_weapon_coll_x2, last_weapon_coll_y2, c_aqua, c_aqua, c_aqua, c_aqua, false);
 }
 
-draw_text(x, y, "x(" + string(x) + "),y(" + string(y) + ")");
+//draw_text(x, y, "x(" + string(x) + "),y(" + string(y) + ")");
