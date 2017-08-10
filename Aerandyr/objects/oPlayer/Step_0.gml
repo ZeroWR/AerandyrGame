@@ -23,6 +23,8 @@ if move != 0 {
 
 vsp = vsp + ((is_wall_sliding) ? sliding_gravity : grv);
 
+next_animation = undefined;
+
 // Jumping
 if 
 (
@@ -39,6 +41,7 @@ if
 		//Jump away from the wall
 		hsp -= (15 * move);
 	}
+	next_animation = sPlayerToJ;
 }
 
 horizontal_collision = false;
@@ -71,68 +74,88 @@ is_wall_sliding = (horizontal_collision == true && vertical_collision == false &
 
 y = y + vsp;
 
-// Player Animation
-if (!place_meeting(x,y+1,oWall))
+if(next_animation == undefined)
 {
-	sprite_index = sPlayerJ;
-	if (sign(vsp) > 0) sprite_index = sPlayerF; else sprite_index = sPlayerJ; 
-} 
-else
-{
-
-	//If we pressed attack and our current sprite isn't the attack sprite, OR
-	//the attack is done playing: play it again.
-	if 
-	(
-		keyboard_check_pressed(ord("J")) && 
-		(
-			sprite_index != sPlayerA || 
-			image_index > (image_number - 1)
-		)	
-	)
+	// Player Animation
+	if (!place_meeting(x,y+1,oWall))
 	{
-		show_debug_message("Attack pressed.  Current animation frame: " + string(image_index) + " out of " + string(image_number - 1));
-		image_index = 0; //Reset the animation frames, so we're sure to start the animation from the beginning.
-	    sprite_index = sPlayerA;
-		is_attacking = true;
-		show_debug_message("Doing enemy collision check");
-		//Do enemy collision check
-		halfwidth = sprite_width / 2;
-		halfheight = sprite_height / 2;
-		coll_x1 = x;
-		coll_y1 = y - halfheight;
-		coll_x2 = x + halfwidth;
-		coll_y2 = coll_y1 + sprite_height;
-		//Not going to lie:  I have no idea how the fuck this works, because I never take into account which way the player is facing. :|
-		inst = collision_rectangle(coll_x1, coll_y1, coll_x2, coll_y2, oTestEnemy, false, true);
-		if(inst != noone)
+		next_animation = sPlayerJ;
+		if (sign(vsp) > 0)
 		{
-			OnEnemyHit(inst, 25);
+			if(sprite_index == sPlayerFromJ && image_index >= (image_number - 1)) 
+				next_animation = sPlayerF; 
+			else if(sprite_index != sPlayerF)
+				next_animation = sPlayerFromJ;
+			else
+				next_animation = sPlayerF; //This should technically never happen, but I'd rather it go straight to this than...wtf ever else.
 		}
-		//DEBUG: Uncomment these if you need to debug the weapon collision
-		//last_weapon_coll_x1 = coll_x1;
-		//last_weapon_coll_y1 = coll_y1;
-		//last_weapon_coll_x2 = coll_x2;
-		//last_weapon_coll_y2 = coll_y2;
-	}
+		else 
+			next_animation = sPlayerJ; 
+	} 
 	else
 	{
-		if (hsp == 0)
+
+		//If we pressed attack and our current sprite isn't the attack sprite, OR
+		//the attack is done playing: play it again.
+		if 
+		(
+			keyboard_check_pressed(ord("J")) && 
+			(
+				sprite_index != sPlayerA || 
+				image_index > (image_number - 1)
+			)	
+		)
 		{
-			sprite_index = sPlayer;
+			show_debug_message("Attack pressed.  Current animation frame: " + string(image_index) + " out of " + string(image_number - 1));
+			image_index = 0; //Reset the animation frames, so we're sure to start the animation from the beginning.
+			next_animation = sPlayerA;
+			is_attacking = true;
+			show_debug_message("Doing enemy collision check");
+			//Do enemy collision check
+			halfwidth = sprite_width / 2;
+			halfheight = sprite_height / 2;
+			coll_x1 = x;
+			coll_y1 = y - halfheight;
+			coll_x2 = x + halfwidth;
+			coll_y2 = coll_y1 + sprite_height;
+			//Not going to lie:  I have no idea how the fuck this works, because I never take into account which way the player is facing. :|
+			inst = collision_rectangle(coll_x1, coll_y1, coll_x2, coll_y2, oTestEnemy, false, true);
+			if(inst != noone)
+			{
+				OnEnemyHit(inst, 25);
+			}
+			//DEBUG: Uncomment these if you need to debug the weapon collision
+			//last_weapon_coll_x1 = coll_x1;
+			//last_weapon_coll_y1 = coll_y1;
+			//last_weapon_coll_x2 = coll_x2;
+			//last_weapon_coll_y2 = coll_y2;
 		}
 		else
 		{
-			sprite_index = sPlayer;
+			if (hsp == 0)
+			{
+				next_animation = sPlayer;
+			}
+			else
+			{
+				next_animation = sPlayer;
+			}
 		}
 	}
 }
 
-if (hsp != 0) image_xscale = sign(hsp);
+if (hsp != 0) 
+	image_xscale = sign(hsp);
 
 if ((abs(hsp) > 0.5) && (vsp == 0) && (is_attacking == false))
 {
-	sprite_index = sPlayerR;
+	next_animation = sPlayerR;
+}
+
+if(sprite_index != next_animation)
+{
+	show_debug_message("Changing animation to " + sprite_get_name(next_animation));
+	sprite_index = next_animation;
 }
 
 
