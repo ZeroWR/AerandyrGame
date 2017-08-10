@@ -8,7 +8,6 @@ key_jump = keyboard_check_pressed(vk_space);
 //We don't want to move if we're attacking.
 if(is_attacking)
 {
-	//show_debug_message("Step returning because we're attacking");
 	return;
 }
 
@@ -96,6 +95,25 @@ else
 		image_index = 0; //Reset the animation frames, so we're sure to start the animation from the beginning.
 	    sprite_index = sPlayerA;
 		is_attacking = true;
+		show_debug_message("Doing enemy collision check");
+		//Do enemy collision check
+		halfwidth = sprite_width / 2;
+		halfheight = sprite_height / 2;
+		coll_x1 = x;
+		coll_y1 = y - halfheight;
+		coll_x2 = x + halfwidth;
+		coll_y2 = coll_y1 + sprite_height;
+		//Not going to lie:  I have no idea how the fuck this works, because I never take into account which way the player is facing. :|
+		inst = collision_rectangle(coll_x1, coll_y1, coll_x2, coll_y2, oTestEnemy, false, true);
+		if(inst != noone)
+		{
+			OnEnemyHit(inst, 25);
+		}
+		//DEBUG: Uncomment these if you need to debug the weapon collision
+		//last_weapon_coll_x1 = coll_x1;
+		//last_weapon_coll_y1 = coll_y1;
+		//last_weapon_coll_x2 = coll_x2;
+		//last_weapon_coll_y2 = coll_y2;
 	}
 	else
 	{
