@@ -44,31 +44,89 @@ if
 	next_animation = sPlayerToJ;
 }
 
+alreadyInItInstance = instance_place(x, y, oPassThroughWall);
+
 horizontal_collision = false;
 // Horizontal Collision
-if (place_meeting(x+hsp,y,oWall))
+//If our next move would put us in a wall:
+horizontal_collision_instance = instance_place(x + hsp, y, oPassThroughWall);
+if(horizontal_collision_instance == noone)
 {
-	while (!place_meeting(x+sign(hsp),y,oWall))
+	if (place_meeting(x+hsp,y,oWall))
 	{
-		x = x + sign(hsp);
+		//Scooch ourselves up to the wall, right before we touch it.
+		while (!place_meeting(x+sign(hsp),y,oWall))
+		{
+			x = x + sign(hsp);
+		}
+		hsp = 0;
+		horizontal_collision = true;
 	}
-	hsp = 0;
-	horizontal_collision = true;
+}
+else
+{
+	facingDirection = image_xscale;
+	backout = false;
+	//If we're already inside the wall, then let us get ourselves out.
+	if(alreadyInItInstance != horizontal_collision_instance)
+	{
+		//We're not inside the wall.  See if we should block movement.
+		backout = (facingDirection == 1 && horizontal_collision_instance.PassThroughLeft == false) ||
+			(facingDirection == -1 && horizontal_collision_instance.PassThroughRight == false);
+	
+		if(backout == true)
+		{
+			while (!place_meeting(x+sign(hsp),y,oPassThroughWall))
+			{
+				x = x + sign(hsp);
+			}
+			hsp = 0;
+			horizontal_collision = true;
+		}
+	}
 }
 
 x = x + hsp;
 
 vertical_collision = false;
+
 // Vertical Collision
-if (place_meeting(x,y+vsp,oWall))
+vertical_collision_instance = instance_place(x, y + vsp, oPassThroughWall);
+if(vertical_collision_instance == noone)
 {
-	while (!place_meeting(x,y+sign(vsp),oWall))
+	if (place_meeting(x,y+vsp,oWall))
 	{
-		y = y + sign(vsp);
+		while (!place_meeting(x,y+sign(vsp),oWall))
+		{
+			y = y + sign(vsp);
+		}
+		vsp = 0;
+		vertical_collision = true;
 	}
-	vsp = 0;
-	vertical_collision = true;
 }
+else
+{
+	facingDirection = sign(vsp);
+	backout = false;
+	//If we're already inside the wall, then let us get ourselves out.
+	if(alreadyInItInstance != vertical_collision_instance)
+	{
+		//We're not inside the wall.  See if we should block movement.
+		backout = (facingDirection == 1 && vertical_collision_instance.PassThroughTop == false) ||
+			(facingDirection == -1 && vertical_collision_instance.PassThroughBottom == false);
+	
+		if(backout == true)
+		{
+			while (!place_meeting(x,y+sign(vsp),oWall))
+			{
+				y = y + sign(vsp);
+			}
+			vsp = 0;
+			vertical_collision = true;
+		}
+	}
+}
+
 
 is_wall_sliding = (horizontal_collision == true && vertical_collision == false && vsp > 0.0);
 

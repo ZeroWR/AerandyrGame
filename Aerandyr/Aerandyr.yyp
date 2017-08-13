@@ -167,11 +167,27 @@
             }
         },
         {
+            "Key": "624ab560-00d0-4d93-9590-3fd366df0777",
+            "Value": {
+                "id": "11265758-fcc0-4217-9535-ad680d84ec21",
+                "resourcePath": "scripts\\instance_place_list\\instance_place_list.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "702b5751-10e8-43b6-8d35-51add89c0ab8",
             "Value": {
                 "id": "2b81de11-fe47-4384-a4dd-d72283c4cb83",
                 "resourcePath": "views\\702b5751-10e8-43b6-8d35-51add89c0ab8.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "70cf1834-a8a8-4162-ab38-84be26401e20",
+            "Value": {
+                "id": "6a4e4982-03a0-4da5-a2a4-4524f974580a",
+                "resourcePath": "objects\\oPassThroughWall\\oPassThroughWall.yy",
+                "resourceType": "GMObject"
             }
         },
         {
