@@ -13,8 +13,18 @@ public class CharacterAnimationController : MonoBehaviour
 			if (value == IsWalking)
 				return;
 			ChangeParameter("MoveFlg", value);
-			if(!value)
-				ChangeAnimation("CA_Idle_1");
+		}
+	}
+	private bool isFacingForwards = true;
+	public bool IsFacingForwards
+	{
+		get { return isFacingForwards; }
+		set
+		{
+			if (value == IsFacingForwards)
+				return;
+			isFacingForwards = value;
+			ChangeAnimation(isFacingForwards ? "CA_Idle_1" : "CA_Idle_2");
 		}
 	}
 	// Start is called before the first frame update

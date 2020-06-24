@@ -34,9 +34,9 @@ public class IsoCharacterController : MonoBehaviour
 		UpdateAnimation(movement);
 	}
 
-	private void UpdateFacingDirection(Vector2 inputVector)
+	private void UpdateHorizontalDirection(Vector2 inputVector)
 	{
-		if (inputVector.x == 0)
+		if (inputVector.x == 0.0f)
 			return;
 		Vector3 tmp = this.transform.localScale;
 		var shouldBeFacingLeft = inputVector.x < 0;
@@ -46,6 +46,20 @@ public class IsoCharacterController : MonoBehaviour
 			tmp.x = shouldBeFacingLeft ? Mathf.Abs(tmp.x) : -Mathf.Abs(tmp.x);
 			this.transform.localScale = tmp;
 		}
+	}
+
+	private void UpdateVerticalDirection(Vector2 inputVector)
+	{
+		if (animationController == null || inputVector.y == 0.0f)
+			return;
+
+		animationController.IsFacingForwards = inputVector.y < 0.0f;
+	}
+
+	private void UpdateFacingDirection(Vector2 inputVector)
+	{
+		UpdateHorizontalDirection(inputVector);
+		UpdateVerticalDirection(inputVector);
 	}
 
 	private void UpdateAnimation(Vector2 movement)
