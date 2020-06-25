@@ -7,13 +7,39 @@ public class IsoCharacterController : MonoBehaviour
 	public float movementSpeed = 1f;
 	private Rigidbody2D rbody;
 	private CharacterAnimationController animationController;
+	private List<IInteractable> touchingInteractables = new List<IInteractable>();
+	private float nextUseTime = 0.0f;
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
 		animationController = GetComponent<CharacterAnimationController>();
 	}
 
-	private Vector2 lastCharacterMovement;
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			DoUse();
+		}
+	}
+
+	private bool CanDoUse
+	{
+		get { return nextUseTime <= Time.time && touchingInteractables.Count > 0; }
+	}
+
+	private void DoUse()
+	{
+		if (!CanDoUse)
+			return;
+
+		foreach(var interactable in touchingInteractables)
+		{
+			if (interactable.CanInteract(this))
+				interactable.Interact(this);
+		}
+		nextUseTime = Time.time + 0.25f;
+	}
 	// Update is called once per frame
 	void FixedUpdate()
 	{
@@ -24,16 +50,10 @@ public class IsoCharacterController : MonoBehaviour
 		inputVector = Vector2.ClampMagnitude(inputVector, 1);
 		Vector2 movement = inputVector * movementSpeed;
 		Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
-		//if(lastCharacterMovement != movement)
-		//{
-		//	Debug.Log(string.Format("Character movement: {0}", movement.ToString()));
-		//	lastCharacterMovement = movement;
-		//}
 		rbody.MovePosition(newPos);
 		UpdateFacingDirection(inputVector);
 		UpdateAnimation(movement);
 	}
-
 	private void UpdateHorizontalDirection(Vector2 inputVector)
 	{
 		if (inputVector.x == 0.0f)
@@ -47,7 +67,6 @@ public class IsoCharacterController : MonoBehaviour
 			this.transform.localScale = tmp;
 		}
 	}
-
 	private void UpdateVerticalDirection(Vector2 inputVector)
 	{
 		if (animationController == null || inputVector.y == 0.0f)
@@ -55,22 +74,40 @@ public class IsoCharacterController : MonoBehaviour
 
 		animationController.IsFacingForwards = inputVector.y < 0.0f;
 	}
-
 	private void UpdateFacingDirection(Vector2 inputVector)
 	{
 		UpdateHorizontalDirection(inputVector);
 		UpdateVerticalDirection(inputVector);
 	}
-
 	private void UpdateAnimation(Vector2 movement)
 	{
 		if (animationController == null)
 			return;
 		var shouldBeWalking = movement.x != 0.0f || movement.y != 0.0f;
 		if(shouldBeWalking != animationController.IsWalking)
-		{
-			//Debug.Log(string.Format("Character.UpdateAnimation: {0}", movement.ToString()));
 			animationController.IsWalking = shouldBeWalking;
-		}
+	}
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		var interactable = collision.gameObject.GetComponent<IInteractable>();
+		if (interactable == null || touchingInteractables.Contains(interactable))
+			return;
+		touchingInteractables.Add(interactable);
+	}
+
+	//Hitting a collider 2D
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		//Do something
+	}
+
+	//Just stop hitting a collider 2D
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		var interactable = collision.gameObject.GetComponent<IInteractable>();
+		if (interactable == null || !touchingInteractables.Contains(interactable))
+			return;
+		touchingInteractables.Remove(interactable);
+		//Do something
 	}
 }
