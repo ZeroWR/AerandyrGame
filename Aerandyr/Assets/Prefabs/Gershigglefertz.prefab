@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6953293851760204673}
   - component: {fileID: 6953293851760204684}
   - component: {fileID: 6953293851760204685}
+  - component: {fileID: 182455959}
   m_Layer: 0
   m_Name: Gershigglefertz
   m_TagString: Untagged
@@ -106,9 +107,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6953293851760204672}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -138,3 +139,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &182455959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953293851760204672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810e68ff7dbd20a4e94e8c795e68f955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
