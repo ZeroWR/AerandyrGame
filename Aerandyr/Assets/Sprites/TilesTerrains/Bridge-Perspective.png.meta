@@ -1,24 +1,18 @@
 fileFormatVersion: 2
-guid: b58cfcca1af3b054696ab007981f9797
+guid: 913fc14f2184b0c4e926cd582ad81e19
 TextureImporter:
   fileIDToRecycleName:
-    21300000: BackgroundImage01_0
-    21300002: BackgroundImage01_1
-    21300004: BackgroundImage01_2
-    21300006: BackgroundImage01_3
-    21300008: BackgroundImage01_4
-    21300010: BackgroundImage01_5
-    21300012: BackgroundImage01_6
-    21300014: BackgroundImage01_7
-    21300016: BackgroundImage01_8
-    21300018: BackgroundImage01_9
-    21300020: BackgroundImage01_10
-    21300022: BackgroundImage01_11
-    21300024: BackgroundImage01_12
-    21300026: BackgroundImage01_13
-    21300028: BackgroundImage01_14
-    21300030: BackgroundImage01_15
-    21300032: BackgroundImage01_16
+    21300000: Bridge-Perspective_0
+    21300002: Bridge-Perspective_1
+    21300004: Bridge-Perspective_2
+    21300006: Bridge-Perspective_3
+    21300008: Bridge-Perspective_4
+    21300010: Bridge-Perspective_5
+    21300012: Bridge-Perspective_6
+    21300014: Bridge-Perspective_7
+    21300016: Bridge-Perspective_8
+    21300018: Bridge-Perspective_9
+    21300020: Bridge-Perspective_10
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -62,9 +56,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 36
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -134,357 +128,221 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BackgroundImage01_0
+      name: Bridge-Perspective_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 108
-        width: 36
-        height: 36
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 0, y: 18}
-        - {x: -18, y: 9}
-        - {x: -18, y: -9}
-        - {x: 0, y: -18}
-        - {x: 18, y: -9}
-        - {x: 18, y: 9}
-      tessellationDetail: 0
-      bones: []
-      spriteID: aef18e94c4625b5469425c4b66411aa6
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundImage01_1
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 108
-        width: 36
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fa1cd0d8a0d8484281d4e75e7444bad
+      spriteID: 37c24060fed8e35498953ca3754cf30f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_2
+      name: Bridge-Perspective_1
       rect:
         serializedVersion: 2
-        x: 72
-        y: 108
-        width: 36
-        height: 36
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cd13658800f0aa4bbbed548b8f8e90a
+      spriteID: f4a895869d369014390f84c853dcc027
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_3
+      name: Bridge-Perspective_2
       rect:
         serializedVersion: 2
-        x: 108
-        y: 108
-        width: 36
-        height: 36
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 0, y: 18}
-        - {x: -18, y: 9}
-        - {x: -18, y: -9}
-        - {x: 0, y: -18}
-        - {x: 18, y: -9}
-        - {x: 18, y: 9}
-      physicsShape:
-      - - {x: 0, y: 18}
-        - {x: -18, y: 9}
-        - {x: -18, y: -9}
-        - {x: 0, y: 0}
-      tessellationDetail: 0
-      bones: []
-      spriteID: e19c377d5cec65e4a806eb9bcfb21582
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundImage01_4
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 108
-        width: 36
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d3b8c8ddd1328c4f86d6f5819af88b4
+      spriteID: 404db1d6e77429141a70aa1988637b69
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_5
-      rect:
-        serializedVersion: 2
-        x: 180
-        y: 108
-        width: 36
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 309e2a11841468449aabfe7de1816842
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundImage01_6
+      name: Bridge-Perspective_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 72
-        width: 36
-        height: 36
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e89eddc1860421f439e1afad7e4406f7
+      spriteID: 8a2dae6deab1929429bfa6e1e0d8b8e7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_7
+      name: Bridge-Perspective_4
       rect:
         serializedVersion: 2
-        x: 36
-        y: 72
-        width: 36
-        height: 36
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9fdf9fcf4c8b5c47961a7f68c6a8b60
+      spriteID: 07d7cc8b79c470547a0f0aa3e98d5c17
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_8
+      name: Bridge-Perspective_5
       rect:
         serializedVersion: 2
-        x: 72
-        y: 72
-        width: 36
-        height: 36
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 340032f326518c14a809506f10aac89c
+      spriteID: 07c14bfaa7d7df04c81c434344787da1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_9
-      rect:
-        serializedVersion: 2
-        x: 108
-        y: 72
-        width: 36
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6804fb1e7c3ef064dab5f7d9d68a14ca
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundImage01_10
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 72
-        width: 36
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50a7fb820d873de47bf8408152fe8b5e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundImage01_11
-      rect:
-        serializedVersion: 2
-        x: 180
-        y: 72
-        width: 36
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a1be0cc5e3346af478fb87e2150de01d
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundImage01_12
+      name: Bridge-Perspective_6
       rect:
         serializedVersion: 2
         x: 0
-        y: 36
-        width: 36
-        height: 36
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59dec1a36f136864f9fc8bc039fde35e
+      spriteID: 1f356a6189b6fe64cbad290e8829b49b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_13
+      name: Bridge-Perspective_7
       rect:
         serializedVersion: 2
-        x: 36
-        y: 36
-        width: 36
-        height: 36
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6226311356898ea4599f73598a504d44
+      spriteID: fc4f7f03d067e1a4d96d8dd832f226d3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_14
+      name: Bridge-Perspective_8
       rect:
         serializedVersion: 2
-        x: 72
-        y: 36
-        width: 36
-        height: 36
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76adb7af36b0401499710d794256d7ef
+      spriteID: 56fd82f2a3c0df64ab73012bd5368d1a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_15
+      name: Bridge-Perspective_9
       rect:
         serializedVersion: 2
-        x: 108
-        y: 36
-        width: 36
-        height: 36
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 067ed9696baee5547811e0e2299d5c9e
+      spriteID: 04abfcc53096d4d409a265c1143fb20f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackgroundImage01_16
+      name: Bridge-Perspective_10
       rect:
         serializedVersion: 2
-        x: 144
-        y: 36
-        width: 36
-        height: 36
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37e032d356895dd4882b8abe1f3cccad
+      spriteID: c1567c62721d21940998d7d12a0cea78
       vertices: []
       indices: 
       edges: []
@@ -492,7 +350,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4a2c415629b63e442938375128edaa79
+    spriteID: b00e5389b88ab724ea9947515e04a93d
     vertices: []
     indices: 
     edges: []
