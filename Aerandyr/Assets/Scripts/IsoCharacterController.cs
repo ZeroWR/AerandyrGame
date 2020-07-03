@@ -9,10 +9,27 @@ public class IsoCharacterController : MonoBehaviour
 	private CharacterAnimationController animationController;
 	private List<IInteractable> touchingInteractables = new List<IInteractable>();
 	private float nextUseTime = 0.0f;
+	private float nextAttackTime = 0.0f;
+	public GameObject SwordDamageTrigger = null;
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
 		animationController = GetComponent<CharacterAnimationController>();
+		if(animationController != null)
+		{
+			animationController.AnimationEvent += AnimationController_AnimationEvent;
+		}
+	}
+
+	private void AnimationController_AnimationEvent(object sender, AnimationEventArgs e)
+	{
+		if(e.AnimationEvent == CharacterAnimationEvents.DoDamage && SwordDamageTrigger != null)
+		{
+			var doDamageTrigger = SwordDamageTrigger.GetComponent<DoDamageTrigger>();
+			if (!doDamageTrigger)
+				return;
+			doDamageTrigger.DoDamage(this.gameObject, 10, this.transform.position);
+		}
 	}
 
 	private void Update()
@@ -21,13 +38,16 @@ public class IsoCharacterController : MonoBehaviour
 		{
 			DoUse();
 		}
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			DoAttack();
+		}
 	}
 
 	private bool CanDoUse
 	{
 		get { return nextUseTime <= Time.time && touchingInteractables.Count > 0; }
 	}
-
 	private void DoUse()
 	{
 		if (!CanDoUse)
@@ -39,6 +59,14 @@ public class IsoCharacterController : MonoBehaviour
 				interactable.Interact(this);
 		}
 		nextUseTime = Time.time + 0.25f;
+	}
+	private bool CanAttack { get { return nextAttackTime <= Time.time; } }
+	private void DoAttack()
+	{
+		if (!CanAttack || !animationController)
+			return;
+		animationController.Attack();
+		nextAttackTime = Time.time + 0.5f;
 	}
 	// Update is called once per frame
 	void FixedUpdate()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, ICanTakeDamage
 {
 	public int Health = 100;
 	private CharacterAnimationController characterAnimationController;
@@ -18,7 +18,7 @@ public class Character : MonoBehaviour
         
     }
 
-	public void TakeDamage(Object sender, int damage)
+	public void TakeDamage(GameObject sender, int damage, Vector2 force)
 	{
 		this.Health -= damage;
 	}
