@@ -6,7 +6,7 @@ public class IsoCharacterController : MonoBehaviour
 {
 	public float movementSpeed = 1f;
 	private Rigidbody2D rbody;
-	private CharacterAnimationController animationController;
+	private PlayerAnimationController animationController;
 	private List<IInteractable> touchingInteractables = new List<IInteractable>();
 	private float nextUseTime = 0.0f;
 	private float nextAttackTime = 0.0f;
@@ -14,7 +14,7 @@ public class IsoCharacterController : MonoBehaviour
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
-		animationController = GetComponent<CharacterAnimationController>();
+		animationController = GetComponent<PlayerAnimationController>();
 		if(animationController != null)
 		{
 			animationController.AnimationEvent += AnimationController_AnimationEvent;

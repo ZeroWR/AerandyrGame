@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour, ICanTakeDamage
 {
 	public int Health = 100;
+	public int MaxHealth = 100;
 	private CharacterAnimationController characterAnimationController;
 	// Start is called before the first frame update
 	void Start()
@@ -18,7 +19,7 @@ public class Character : MonoBehaviour, ICanTakeDamage
         
     }
 
-	public void TakeDamage(GameObject sender, int damage, Vector2 force)
+	public virtual void TakeDamage(GameObject sender, int damage, Vector2 force)
 	{
 		this.Health -= damage;
 	}
