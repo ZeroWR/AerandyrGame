@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BaseEnemy : Character
 {
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	protected override void Start()
     {
-        
+		base.Start();
     }
 
     // Update is called once per frame
@@ -23,5 +23,20 @@ public class BaseEnemy : Character
 			return;
 		rbody.AddForce(force);
 		base.TakeDamage(sender, damage, force);
+	}
+	protected override void Die()
+	{
+		var rbody = this.GetComponent<Rigidbody2D>();
+		var collider = this.GetComponent<Collider2D>();
+		if (collider != null)
+		{
+			collider.enabled = false;
+		}
+		if(rbody != null)
+		{
+			rbody.velocity = Vector2.zero;
+			rbody.isKinematic = true;
+		}
+		base.Die();
 	}
 }

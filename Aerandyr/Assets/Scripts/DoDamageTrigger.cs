@@ -4,35 +4,47 @@ using UnityEngine;
 
 public class DoDamageTrigger : MonoBehaviour
 {
-	private List<GameObject> touchingDamageables = new List<GameObject>();
+	protected List<GameObject> touchingDamageables = new List<GameObject>();
 	// Start is called before the first frame update
 	void Start()
     {
         
     }
-	public void DoDamage(GameObject sender, int damage, Vector2 fromPosition)
+	public virtual void DoDamageToAll(GameObject sender, int damage, Vector2 fromPosition)
 	{
 		foreach(var obj in touchingDamageables)
 		{
-			var damageable = obj.GetComponent<ICanTakeDamage>();
-			if (damageable == null)
-				continue;
-			Vector2 force = (sender.transform.position - obj.transform.position) * -500000;
-			damageable.TakeDamage(sender, damage, force);
+			this.DoDamage(sender, obj, damage, fromPosition);
 		}
+	}
+	public virtual void DoDamage(GameObject sender, GameObject target, int damage, Vector2 fromPosition)
+	{
+		var damageable = target.GetComponent<ICanTakeDamage>();
+		if (damageable == null)
+			return;
+		Vector2 force = (sender.transform.position - target.transform.position) * -500000;
+		damageable.TakeDamage(sender, damage, force);
 	}
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		var damageable = collision.gameObject.GetComponent<ICanTakeDamage>();
 		if (damageable == null || touchingDamageables.Contains(collision.gameObject))
 			return;
-		touchingDamageables.Add(collision.gameObject);
+		this.OnDamageableEntered(collision.gameObject);
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		var damageable = collision.gameObject.GetComponent<ICanTakeDamage>();
 		if (damageable == null || !touchingDamageables.Contains(collision.gameObject))
 			return;
-		touchingDamageables.Remove(collision.gameObject);
+		this.OnDamageableExited(collision.gameObject);
+	}
+	protected virtual void OnDamageableEntered(GameObject gameObject)
+	{
+		touchingDamageables.Add(gameObject);
+	}
+	protected virtual void OnDamageableExited(GameObject gameObject)
+	{
+		touchingDamageables.Remove(gameObject);
 	}
 }

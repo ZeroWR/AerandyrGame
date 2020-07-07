@@ -28,7 +28,7 @@ public class IsoCharacterController : MonoBehaviour
 			var doDamageTrigger = SwordDamageTrigger.GetComponent<DoDamageTrigger>();
 			if (!doDamageTrigger)
 				return;
-			doDamageTrigger.DoDamage(this.gameObject, 10, this.transform.position);
+			doDamageTrigger.DoDamageToAll(this.gameObject, 10, this.transform.position);
 		}
 	}
 

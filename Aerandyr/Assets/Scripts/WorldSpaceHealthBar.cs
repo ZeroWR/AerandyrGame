@@ -21,7 +21,14 @@ public class WorldSpaceHealthBar : MonoBehaviour
     {
 		if(character != null && this.Health != null)
 		{
-			this.Health.fillAmount = ((float)this.character.Health) / ((float)this.character.MaxHealth);
+			if(character.IsDead && this.HealthCanvas.enabled)
+			{
+				this.HealthCanvas.enabled = false;
+			}
+			else if(!character.IsDead)
+			{
+				this.Health.fillAmount = ((float)this.character.Health) / ((float)this.character.MaxHealth);
+			}
 		}
     }
 }

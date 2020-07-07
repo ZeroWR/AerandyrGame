@@ -41,13 +41,13 @@ public class CharacterAnimationController : MonoBehaviour
     {
         
     }
-	protected void ChangeAnimation(string animationName)
+	public void ChangeAnimation(string animationName)
 	{
 		if (animator == null)
 			return;
 		animator.Play(animationName);
 	}
-	protected void ChangeParameter(string name, bool flag)
+	public void ChangeParameter(string name, bool flag)
 	{
 		if (animator == null)
 			return;
