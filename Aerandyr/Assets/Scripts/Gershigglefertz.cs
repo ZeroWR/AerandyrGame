@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gershigglefertz : MonoBehaviour
+public class Gershigglefertz : MonoBehaviour, IInteractable
 {
 	private Animator animator;
 	private bool isJiggling = false;
@@ -40,5 +40,20 @@ public class Gershigglefertz : MonoBehaviour
 	private void SetNextJiggleTime()
 	{
 		nextJiggleTime = Time.time + Random.Range(1.0f, 3.0f);
+	}
+	public void Interact(Object sender)
+	{
+		if(sender is IsoCharacterController)
+		{
+			var senderPlayer = sender as IsoCharacterController;
+			if (!senderPlayer.PlayerCharacter.HUD)
+				return;
+
+			senderPlayer.PlayerCharacter.HUD.ShowDialog("I am Gershigglefertz.\n\n\nPleased to meet you.");
+		}
+	}
+	public bool CanInteract(Object sender)
+	{
+		return sender is IsoCharacterController;
 	}
 }

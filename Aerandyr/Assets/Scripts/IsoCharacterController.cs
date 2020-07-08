@@ -11,6 +11,8 @@ public class IsoCharacterController : MonoBehaviour
 	private float nextUseTime = 0.0f;
 	private float nextAttackTime = 0.0f;
 	public GameObject SwordDamageTrigger = null;
+	private Player playerCharacter = null;
+	public Player PlayerCharacter { get { return playerCharacter; } }
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
@@ -19,6 +21,7 @@ public class IsoCharacterController : MonoBehaviour
 		{
 			animationController.AnimationEvent += AnimationController_AnimationEvent;
 		}
+		this.playerCharacter = GetComponent<Player>();
 	}
 
 	private void AnimationController_AnimationEvent(object sender, AnimationEventArgs e)

@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
-	public Text HealthText;
+	private HUD hud = null;
+	public HUD HUD { get { return hud; } }
     // Start is called before the first frame update
     protected override void Start()
     {
-		UpdateHealthText();
+		this.hud = GetComponent<HUD>();
+		if(this.hud)
+			this.hud.Player = this;
 	}
 
     // Update is called once per frame
@@ -20,13 +23,6 @@ public class Player : Character
 	public override void TakeDamage(GameObject sender, int damage, Vector2 force)
 	{
 		base.TakeDamage(sender, damage, force);
-		UpdateHealthText();
 	}
-	private void UpdateHealthText()
-	{
-		if (this.HealthText != null)
-		{
-			this.HealthText.text = this.Health.ToString();
-		}
-	}
+	
 }
