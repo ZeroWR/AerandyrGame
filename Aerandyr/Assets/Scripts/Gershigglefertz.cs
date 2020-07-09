@@ -46,10 +46,10 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 		if(sender is IsoCharacterController)
 		{
 			var senderPlayer = sender as IsoCharacterController;
-			if (!senderPlayer.PlayerCharacter.HUD)
+			if (!senderPlayer.HUD)
 				return;
 
-			senderPlayer.PlayerCharacter.HUD.ShowDialog("I am Gershigglefertz.\n\n\nPleased to meet you.");
+			senderPlayer.HUD.ShowDialog("I am Gershigglefertz.\n\n\nPleased to meet you.");
 		}
 	}
 	public bool CanInteract(Object sender)

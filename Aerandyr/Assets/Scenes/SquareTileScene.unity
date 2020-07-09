@@ -56331,6 +56331,7 @@ MonoBehaviour:
   HealthText: {fileID: 1363929310}
   DialogPanel: {fileID: 565470604}
   DialogText: {fileID: 1182987722}
+  KeyPressInterval: 0.5
 --- !u!4 &1837519266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4663644318173803, guid: ea449a47ca870734a9857aa69ad1fa09,
@@ -56598,7 +56599,7 @@ PrefabInstance:
     - target: {fileID: 3923387393856926465, guid: c09d947dc91d1c2489aaf43ddff543b7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3923387393856926465, guid: c09d947dc91d1c2489aaf43ddff543b7,
         type: 3}
@@ -56639,6 +56640,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923387393856926464, guid: c09d947dc91d1c2489aaf43ddff543b7,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c09d947dc91d1c2489aaf43ddff543b7, type: 3}

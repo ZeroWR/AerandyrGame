@@ -5,14 +5,10 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
-	private HUD hud = null;
-	public HUD HUD { get { return hud; } }
     // Start is called before the first frame update
     protected override void Start()
     {
-		this.hud = GetComponent<HUD>();
-		if(this.hud)
-			this.hud.Player = this;
+		base.Start();
 	}
 
     // Update is called once per frame

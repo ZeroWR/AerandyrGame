@@ -9,6 +9,8 @@ public class HUD : MonoBehaviour
 	public Canvas DialogPanel;
 	public Text DialogText;
 	public Player Player { get; set; }
+	private float nextKeyDownTime = 0.0f;
+	public float KeyPressInterval = 0.5f;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -19,11 +21,14 @@ public class HUD : MonoBehaviour
     void Update()
     {
 		UpdateHealthText();
-		if(this.DialogPanel.enabled && Input.GetKeyDown(KeyCode.E))
+    }
+	public void ProcessInput()
+	{
+		if (this.IsInDialog && this.CanProcessKeyPress && Input.GetKeyDown(KeyCode.E))
 		{
 			CloseDialog();
 		}
-    }
+	}
 	private void UpdateHealthText()
 	{
 		if (this.HealthText != null && this.Player != null)
@@ -35,10 +40,13 @@ public class HUD : MonoBehaviour
 	{
 		this.DialogText.text = dialogText;
 		this.DialogPanel.enabled = true;
+		this.nextKeyDownTime = Time.time + this.KeyPressInterval;
 	}
 	public void CloseDialog()
 	{
 		this.DialogText.text = string.Empty;
 		this.DialogPanel.enabled = false;
 	}
+	public bool IsInDialog { get { return this.DialogPanel != null && this.DialogPanel.enabled; } }
+	private bool CanProcessKeyPress { get { return Time.time >= this.nextKeyDownTime; } }
 }

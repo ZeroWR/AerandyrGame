@@ -13,6 +13,8 @@ public class IsoCharacterController : MonoBehaviour
 	public GameObject SwordDamageTrigger = null;
 	private Player playerCharacter = null;
 	public Player PlayerCharacter { get { return playerCharacter; } }
+	private HUD hud = null;
+	public HUD HUD { get { return hud; } }
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
@@ -22,6 +24,9 @@ public class IsoCharacterController : MonoBehaviour
 			animationController.AnimationEvent += AnimationController_AnimationEvent;
 		}
 		this.playerCharacter = GetComponent<Player>();
+		this.hud = GetComponent<HUD>();
+		if (this.hud && this.playerCharacter)
+			this.hud.Player = this.playerCharacter;
 	}
 
 	private void AnimationController_AnimationEvent(object sender, AnimationEventArgs e)
@@ -37,16 +42,26 @@ public class IsoCharacterController : MonoBehaviour
 
 	private void Update()
 	{
+		if(this.IsInDialog)
+		{
+			//Forward keypress here, or do in HUD?
+			this.HUD.ProcessInput();
+		}
+		else
+			ProcessInput();
+	}
+	private bool IsInDialog { get { return this.HUD != null && this.HUD.IsInDialog; } }
+	private void ProcessInput()
+	{
 		if (Input.GetKeyDown(KeyCode.E))
 		{
 			DoUse();
 		}
-		if(Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			DoAttack();
 		}
 	}
-
 	private bool CanDoUse
 	{
 		get { return nextUseTime <= Time.time && touchingInteractables.Count > 0; }
@@ -74,6 +89,8 @@ public class IsoCharacterController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
+		if (this.IsInDialog)
+			return;
 		Vector2 currentPos = rbody.position;
 		float horizontalInput = Input.GetAxis("Horizontal");
 		float verticalInput = Input.GetAxis("Vertical");
