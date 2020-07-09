@@ -7,11 +7,13 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 	private Animator animator;
 	private bool isJiggling = false;
 	private float nextJiggleTime = 0.0f;
+	private Dialog ourDialog;
     // Start is called before the first frame update
     void Start()
     {
 		animator = GetComponent<Animator>();
 		SetNextJiggleTime();
+		ourDialog = Interactions.Instance.GetDialog("Gershigglefertz");
 	}
 
     // Update is called once per frame
@@ -46,10 +48,10 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 		if(sender is IsoCharacterController)
 		{
 			var senderPlayer = sender as IsoCharacterController;
-			if (!senderPlayer.HUD)
+			if (!senderPlayer.HUD || this.ourDialog == null)
 				return;
 
-			senderPlayer.HUD.ShowDialog("I am Gershigglefertz.\n\n\nPleased to meet you.");
+			senderPlayer.HUD.ShowDialog(this.ourDialog);
 		}
 	}
 	public bool CanInteract(Object sender)
