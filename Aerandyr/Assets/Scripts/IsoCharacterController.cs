@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class IsoCharacterController : MonoBehaviour
 	public Player PlayerCharacter { get { return playerCharacter; } }
 	private HUD hud = null;
 	public HUD HUD { get { return hud; } }
+	private bool isInCutscene = false;
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
@@ -29,17 +31,6 @@ public class IsoCharacterController : MonoBehaviour
 			this.hud.Player = this.playerCharacter;
 	}
 
-	private void AnimationController_AnimationEvent(object sender, AnimationEventArgs e)
-	{
-		if(e.AnimationEvent == CharacterAnimationEvents.DoDamage && SwordDamageTrigger != null)
-		{
-			var doDamageTrigger = SwordDamageTrigger.GetComponent<DoDamageTrigger>();
-			if (!doDamageTrigger)
-				return;
-			doDamageTrigger.DoDamageToAll(this.gameObject, 10, this.transform.position);
-		}
-	}
-
 	private void Update()
 	{
 		if(this.IsInDialog)
@@ -47,10 +38,9 @@ public class IsoCharacterController : MonoBehaviour
 			//Forward keypress here, or do in HUD?
 			this.HUD.ProcessInput();
 		}
-		else
+		else if(!isInCutscene)
 			ProcessInput();
 	}
-	private bool IsInDialog { get { return this.HUD != null && this.HUD.IsInDialog; } }
 	private void ProcessInput()
 	{
 		if (Input.GetKeyDown(KeyCode.E))
@@ -62,22 +52,36 @@ public class IsoCharacterController : MonoBehaviour
 			DoAttack();
 		}
 	}
-	private bool CanDoUse
+
+	#region Dialog/HUD
+	private bool IsInDialog { get { return this.HUD != null && this.HUD.IsInDialog; } }
+	public void InventoryAcquiredNotification(Dialog dialog)
 	{
-		get { return nextUseTime <= Time.time && touchingInteractables.Count > 0; }
-	}
-	private void DoUse()
-	{
-		if (!CanDoUse)
+		if (this.isInCutscene)
 			return;
 
-		foreach(var interactable in touchingInteractables)
+		this.isInCutscene = true;
+		this.animationController.IsFacingForwards = true;
+		EventHandler<AnimationArgs> animationDoneCallback = null;
+		animationDoneCallback = (object sender, AnimationArgs e) =>
 		{
-			if (interactable.CanInteract(this))
-				interactable.Interact(this);
-		}
-		nextUseTime = Time.time + 0.25f;
+			if (e.Animation != CharacterAnimations.Win)
+				return;
+			this.HUD.ShowDialog(dialog);
+			this.animationController.AnimationDone -= animationDoneCallback;
+			this.isInCutscene = false;
+		};
+		this.animationController.AnimationDone += animationDoneCallback;
+		this.animationController.PlayWinAnimation();
 	}
+
+	private void AnimationController_AnimationDone(object sender, AnimationArgs e)
+	{
+		throw new System.NotImplementedException();
+	}
+	#endregion
+
+	#region Attack
 	private bool CanAttack { get { return nextAttackTime <= Time.time; } }
 	private void DoAttack()
 	{
@@ -86,6 +90,9 @@ public class IsoCharacterController : MonoBehaviour
 		animationController.Attack();
 		nextAttackTime = Time.time + 0.5f;
 	}
+	#endregion
+
+	#region Movement
 	// Update is called once per frame
 	void FixedUpdate()
 	{
@@ -132,8 +139,28 @@ public class IsoCharacterController : MonoBehaviour
 		if (animationController == null)
 			return;
 		var shouldBeWalking = movement.x != 0.0f || movement.y != 0.0f;
-		if(shouldBeWalking != animationController.IsWalking)
+		if (shouldBeWalking != animationController.IsWalking)
 			animationController.IsWalking = shouldBeWalking;
+	}
+
+	#endregion
+
+	#region Use
+	private bool CanDoUse
+	{
+		get { return nextUseTime <= Time.time && touchingInteractables.Count > 0; }
+	}
+	private void DoUse()
+	{
+		if (!CanDoUse)
+			return;
+
+		foreach (var interactable in touchingInteractables)
+		{
+			if (interactable.CanInteract(this))
+				interactable.Interact(this);
+		}
+		nextUseTime = Time.time + 0.25f;
 	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
@@ -158,4 +185,18 @@ public class IsoCharacterController : MonoBehaviour
 		touchingInteractables.Remove(interactable);
 		//Do something
 	}
+	#endregion
+
+	#region Callbacks
+	private void AnimationController_AnimationEvent(object sender, AnimationEventArgs e)
+	{
+		if (e.AnimationEvent == CharacterAnimationEvents.DoDamage && SwordDamageTrigger != null)
+		{
+			var doDamageTrigger = SwordDamageTrigger.GetComponent<DoDamageTrigger>();
+			if (!doDamageTrigger)
+				return;
+			doDamageTrigger.DoDamageToAll(this.gameObject, 10, this.transform.position);
+		}
+	}
+	#endregion
 }

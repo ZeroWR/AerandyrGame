@@ -51,7 +51,7 @@ public class DialogPlayer : MonoBehaviour
 				StartNextSection();
 				InvokeRepeating("PlayCurrentSection", fadeInTime, fadeInTime);
 			}
-        }//if click
+        }
     }
 
     public bool LoadDialog(Dialog dialog)
@@ -73,14 +73,11 @@ public class DialogPlayer : MonoBehaviour
         PlayerState = DialogPlayerState.ShouldBePlaying;
 		OnStartedPlaying();
 		InvokeRepeating("PlayCurrentSection", fadeInTime, fadeInTime);
-		//StartCoroutine(PlayCurrentSection());
 		return true;
     }
 
     public void StopPlaying()
     {
-		//if(PlayerState != DialogPlayerState.NotPlaying)
-		//	OnFinishedPlaying();
 		Reset();
     }
 
@@ -91,28 +88,6 @@ public class DialogPlayer : MonoBehaviour
 		CurrentPlaceInSection = 0;
 		CurrentSectionText = string.Empty;
 	}
-
-	//IEnumerator PlayCurrentSection()
- //   {
- //       PlayerState = DialogPlayerState.IsPlaying;
- //       DialogSection ourCurrentSection = CurrentDialog.Sections[CurrentSection];
- //       while (CurrentPlaceInSection < ourCurrentSection.SectionText.Length && PlayerState != DialogPlayerState.ShouldFinishPlaying)
- //       {
- //           CurrentSectionText += ourCurrentSection.SectionText[++CurrentPlaceInSection];
- //           OnTextUpdated(CurrentSectionText);
- //           yield return new WaitForSeconds(fadeInTime);
- //       }
- //       CurrentSectionText = ourCurrentSection.SectionText;
- //       OnTextUpdated(CurrentSectionText);
- //       OnSectionFinished(ourCurrentSection);
-
-	//	if(DonePlayingEntireDialog)
-	//	{
-	//		PlayerState = DialogPlayerState.FinishedPlaying;
-	//		CurrentDialog.HasPlayed = true;
-	//		OnFinishedPlaying();
-	//	}
- //   }
 
 	void PlayCurrentSection()
 	{

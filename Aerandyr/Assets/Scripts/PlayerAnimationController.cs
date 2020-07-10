@@ -30,6 +30,10 @@ public class PlayerAnimationController : CharacterAnimationController
 	{
 		ChangeAnimation(isFacingForwards ? "CA_Attack_1" : "CA_Attack_2");
 	}
+	public void PlayWinAnimation()
+	{
+		ChangeAnimation(isFacingForwards ? "CA_Win_1" : "CA_Win_2");
+	}
 	// Start is called before the first frame update
 	override protected void Start()
     {

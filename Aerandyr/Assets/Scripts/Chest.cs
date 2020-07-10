@@ -7,6 +7,8 @@ public class Chest : MonoBehaviour, IInteractable
 	private Animator animator;
 	private bool isOpen = false;
 	private bool isInAnimation = false;
+	private IsoCharacterController sender = null;
+	private bool hasBeenOpened = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,7 @@ public class Chest : MonoBehaviour, IInteractable
     }
 	public void Interact(Object sender)
 	{
+		this.sender = sender as IsoCharacterController;
 		if (isOpen)
 			Close();
 		else
@@ -21,7 +24,7 @@ public class Chest : MonoBehaviour, IInteractable
 	}
 	public bool CanInteract(Object sender)
 	{
-		return true;
+		return sender is IsoCharacterController;
 	}
 	private void Open()
 	{
@@ -41,10 +44,22 @@ public class Chest : MonoBehaviour, IInteractable
 	{
 		isOpen = true;
 		isInAnimation = false;
+		if(this.sender != null)
+		{
+			var message = hasBeenOpened ? "This chest is empty." : "You found $20!";
+			var dialog = new TransientDialog(message);
+			if (hasBeenOpened)
+				this.sender.HUD.ShowDialog(dialog);
+			else
+				this.sender.InventoryAcquiredNotification(dialog);
+			this.sender = null;
+		}
+		this.hasBeenOpened = true;
 	}
 	public void OnCloseAnimationEnded()
 	{
 		isOpen = false;
 		isInAnimation = false;
+		this.sender = null;
 	}
 }

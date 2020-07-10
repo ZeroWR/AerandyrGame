@@ -8,7 +8,8 @@ public enum CharacterAnimations
 	Idle,
 	Attack1,
 	Attack2,
-	Walk
+	Walk,
+	Win
 }
 
 public class AnimationArgs : EventArgs

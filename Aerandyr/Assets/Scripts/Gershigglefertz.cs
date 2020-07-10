@@ -48,6 +48,9 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 		if(sender is IsoCharacterController)
 		{
 			var senderPlayer = sender as IsoCharacterController;
+			//This sucks.  Have to do this because Start() isn't called in any order.
+			if(this.ourDialog == null)
+				ourDialog = Interactions.Instance.GetDialog("Gershigglefertz");
 			if (!senderPlayer.HUD || this.ourDialog == null)
 				return;
 
