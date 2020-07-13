@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +13,18 @@ public class DoDamageTrigger : MonoBehaviour
     }
 	public virtual void DoDamageToAll(GameObject sender, int damage, Vector2 fromPosition)
 	{
-		foreach(var obj in touchingDamageables)
+		try
 		{
-			this.DoDamage(sender, obj, damage, fromPosition);
+			foreach (var obj in touchingDamageables)
+			{
+				this.DoDamage(sender, obj, damage, fromPosition);
+			}
+		}
+		catch(Exception ex)
+		{
+			var stopHere = ex.Message;
+			Debug.Log("You should have stopped here.");
+			Debug.LogError(ex);
 		}
 	}
 	public virtual void DoDamage(GameObject sender, GameObject target, int damage, Vector2 fromPosition)
