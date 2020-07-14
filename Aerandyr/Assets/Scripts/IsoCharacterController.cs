@@ -17,6 +17,8 @@ public class IsoCharacterController : MonoBehaviour
 	private HUD hud = null;
 	public HUD HUD { get { return hud; } }
 	private bool isInCutscene = false;
+	private bool canMove = true;
+	private float nextCanMoveTime = 0.0f;
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
@@ -40,6 +42,9 @@ public class IsoCharacterController : MonoBehaviour
 		}
 		else if(!isInCutscene)
 			ProcessInput();
+
+		if (!this.canMove && this.nextCanMoveTime <= Time.time)
+			this.canMove = true;
 	}
 	private void ProcessInput()
 	{
@@ -51,6 +56,12 @@ public class IsoCharacterController : MonoBehaviour
 		{
 			DoAttack();
 		}
+	}
+
+	public void TakeDamage(GameObject sender, int damage, Vector2 force)
+	{
+		this.nextCanMoveTime = Time.time + 0.25f;
+		this.canMove = false;
 	}
 
 	#region Dialog/HUD
@@ -74,11 +85,6 @@ public class IsoCharacterController : MonoBehaviour
 		this.animationController.AnimationDone += animationDoneCallback;
 		this.animationController.PlayWinAnimation();
 	}
-
-	private void AnimationController_AnimationDone(object sender, AnimationArgs e)
-	{
-		throw new System.NotImplementedException();
-	}
 	#endregion
 
 	#region Attack
@@ -96,7 +102,7 @@ public class IsoCharacterController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		if (this.IsInDialog)
+		if (this.IsInDialog || !this.canMove)
 			return;
 		Vector2 currentPos = rbody.position;
 		float horizontalInput = Input.GetAxis("Horizontal");
