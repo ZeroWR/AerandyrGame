@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9998cd24c99e604c953f0d15d63a78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2
+  movementSpeed: 100
   SwordDamageTrigger: {fileID: 860218615}
 --- !u!50 &1240648832903861623
 Rigidbody2D:

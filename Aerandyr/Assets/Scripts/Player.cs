@@ -26,8 +26,18 @@ public class Player : Character
 		var rbody = this.GetComponent<Rigidbody2D>();
 		if (!rbody)
 			return;
+		rbody.velocity = Vector2.zero;
 		rbody.AddForce(force/*, ForceMode2D.Impulse*/);
 		base.TakeDamage(sender, damage, force);
+		//var debugMessage = string.Format
+		//	(
+		//		"Took damage from {0} at position {1} with force {2}.  Our position: {3}",
+		//		sender.name,
+		//		sender.transform.position.ToString(),
+		//		force.ToString(),
+		//		this.transform.position.ToString()
+		//	);
+		//Debug.Log(debugMessage);
 		if (controller)
 			controller.TakeDamage(sender, damage, force);
 		nextTakeDamageTime = Time.time + 0.25f;

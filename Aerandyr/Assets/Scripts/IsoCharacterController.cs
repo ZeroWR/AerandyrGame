@@ -44,7 +44,9 @@ public class IsoCharacterController : MonoBehaviour
 			ProcessInput();
 
 		if (!this.canMove && this.nextCanMoveTime <= Time.time)
+		{
 			this.canMove = true;
+		}
 	}
 	private void ProcessInput()
 	{
@@ -62,6 +64,11 @@ public class IsoCharacterController : MonoBehaviour
 	{
 		this.nextCanMoveTime = Time.time + 0.25f;
 		this.canMove = false;
+		if(this.animationController != null)
+		{
+			this.animationController.IsWalking = false;
+			this.animationController.PlayHurtAnimation();
+		}
 	}
 
 	#region Dialog/HUD
@@ -111,7 +118,8 @@ public class IsoCharacterController : MonoBehaviour
 		inputVector = Vector2.ClampMagnitude(inputVector, 1);
 		Vector2 movement = inputVector * movementSpeed;
 		Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
-		rbody.MovePosition(newPos);
+		rbody.velocity = movement * Time.fixedDeltaTime;
+		//rbody.MovePosition(newPos);
 		UpdateFacingDirection(inputVector);
 		UpdateAnimation(movement);
 	}

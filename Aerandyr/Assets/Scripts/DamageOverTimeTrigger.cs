@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class DamageOverTimeContainer
 {
-	private GameObject target = null;
+	private Collider2D target = null;
 	private DamageOverTimeTrigger sender = null;
 	private Coroutine coroutine = null;
 	private bool enabled = false;
-	public DamageOverTimeContainer(GameObject target, DamageOverTimeTrigger sender)
+	public DamageOverTimeContainer(Collider2D target, DamageOverTimeTrigger sender)
 	{
 		this.target = target;
 		this.sender = sender;
 	}
-	public GameObject Target { get { return target; } }
+	public Collider2D Target { get { return target; } }
 	public void Start()
 	{
 		if (this.coroutine != null)
@@ -48,14 +48,14 @@ public class DamageOverTimeTrigger : DoDamageTrigger
 	public int EveryXSeconds = 1;
 	private List<DamageOverTimeContainer> damageContainers = new List<DamageOverTimeContainer>();
 
-	protected override void OnDamageableEntered(GameObject gameObject)
+	protected override void OnDamageableEntered(Collider2D gameObject)
 	{
 		base.OnDamageableEntered(gameObject);
 		var damageContainer = new DamageOverTimeContainer(gameObject, this);
 		damageContainer.Start();
 		this.damageContainers.Add(damageContainer);
 	}
-	protected override void OnDamageableExited(GameObject gameObject)
+	protected override void OnDamageableExited(Collider2D gameObject)
 	{
 		base.OnDamageableExited(gameObject);
 		var damageContainer = this.damageContainers.Find(x => x.Target == gameObject);

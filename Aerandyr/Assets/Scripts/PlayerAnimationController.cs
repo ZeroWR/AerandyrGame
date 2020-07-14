@@ -23,16 +23,28 @@ public class PlayerAnimationController : CharacterAnimationController
 			if (value == IsFacingForwards)
 				return;
 			isFacingForwards = value;
-			ChangeAnimation(isFacingForwards ? "CA_Idle_1" : "CA_Idle_2");
+			var animationName = GetActualAnimationName("Idle");
+			ChangeAnimation(animationName);
 		}
+	}
+	public void PlayHurtAnimation()
+	{
+		var animationName = GetActualAnimationName("Damage");
+		ChangeAnimation(animationName);
 	}
 	public void Attack()
 	{
-		ChangeAnimation(isFacingForwards ? "CA_Attack_1" : "CA_Attack_2");
+		var animationName = GetActualAnimationName("Attack");
+		ChangeAnimation(animationName);
 	}
 	public void PlayWinAnimation()
 	{
-		ChangeAnimation(isFacingForwards ? "CA_Win_1" : "CA_Win_2");
+		var animationName = GetActualAnimationName("Win");
+		ChangeAnimation(animationName);
+	}
+	private string GetActualAnimationName(string animationName)
+	{
+		return string.Format("CA_{0}_{1}", animationName, isFacingForwards ? 1 : 2);
 	}
 	// Start is called before the first frame update
 	override protected void Start()
