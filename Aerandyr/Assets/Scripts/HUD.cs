@@ -43,20 +43,9 @@ public class HUD : MonoBehaviour
 		if (this.QuestPanel)
 		{
 			this.QuestPanel.enabled = false;
-			//var children = this.QuestPanel.GetComponentsInChildren<Image>();
-			//var background = children.SingleOrDefault(x => x.name == "Background");
-			//if(background != null)
-			//{
-			//	this.questPanelRectTransform = background.GetComponent<RectTransform>();
-			//	this.originalQuestPanelPosition = this.questPanelRectTransform.anchoredPosition;
-			//	this.questTween = background.GetComponent<EasyTween>();
-			//}
-			//else
-			//{
-				this.questPanelRectTransform = this.QuestPanel.GetComponent<RectTransform>();
-				this.originalQuestPanelPosition = this.questPanelRectTransform.anchoredPosition;
-				this.questTween = this.QuestPanel.GetComponent<EasyTween>();
-			//}
+			this.questPanelRectTransform = this.QuestPanel.GetComponent<RectTransform>();
+			this.originalQuestPanelPosition = this.questPanelRectTransform.anchoredPosition;
+			this.questTween = this.QuestPanel.GetComponent<EasyTween>();
 			this.questTween.enabled = false;
 		}
 		this.questAnimationDoneEvent.AddListener(new UnityAction(this.OnQuestAnimationDone));
@@ -139,41 +128,8 @@ public class HUD : MonoBehaviour
 		questTween.SetAnimatioDuration(3f);
 		questTween.SetAnimationPosition(startPosition, endPosition, this.QuestAnimation, closingAnimation);
 		questTween.enabled = true;
-		//SetupQuestTitleAnimation(title);
 		questTween.OpenCloseObjectAnimation();
 	}
-	//private void SetupQuestTitleAnimation(Text title)
-	//{
-	//	var questTitleTween = title.GetComponent<EasyTween>();
-	//	if (!questTitleTween)
-	//		return;
-	//	questTitleTween.SetAnimationProperties
-	//	(
-	//		new UITween.AnimationParts
-	//		(
-	//			UITween.AnimationParts.State.CLOSE,
-	//			false,
-	//			false,
-	//			true,
-	//			UITween.AnimationParts.EndTweenClose.NOTHING,
-	//			UITween.AnimationParts.CallbackCall.NOTHING,
-	//			null,
-	//			null
-	//		)
-	//	);
-	//	var startPosition = questTitleTween.rectTransform.anchoredPosition;
-	//	//startPosition.x += (Screen.width * 0.5f);
-	//	startPosition.x += 50;
-	//	var endPosition = questTitleTween.rectTransform.anchoredPosition;
-	//	endPosition.x -= 50;
-	//	questTitleTween.rectTransform.anchoredPosition = startPosition;
-	//	questTitleTween
-	//	questTitleTween.SetAnimatioDuration(3);
-	//	questTitleTween.SetAnimationPosition(startPosition, endPosition, this.QuestAnimation, closingAnimation);
-	//	questTitleTween.SetFadeStartEndValues(0.0f, 1.0f);
-	//	questTitleTween.SetFade(true);
-	//	questTitleTween.OpenCloseObjectAnimation();
-	//}
 	public void OnQuestAnimationDone()
 	{
 		this.questPanelRectTransform.anchoredPosition = this.originalQuestPanelPosition;
