@@ -19,6 +19,8 @@ public class IsoCharacterController : MonoBehaviour
 	private bool isInCutscene = false;
 	private bool canMove = true;
 	private float nextCanMoveTime = 0.0f;
+	private List<Quest> ourQuests = new List<Quest>();
+	private Quest currentQuest = null;
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
@@ -91,6 +93,15 @@ public class IsoCharacterController : MonoBehaviour
 		};
 		this.animationController.AnimationDone += animationDoneCallback;
 		this.animationController.PlayWinAnimation();
+	}
+	public void ReceivedQuest(Quest quest)
+	{
+		if (ourQuests.Contains(quest))
+			return;
+
+		this.HUD.ReceivedQuest(quest);
+		if (this.currentQuest == null)
+			this.currentQuest = quest;
 	}
 	#endregion
 

@@ -13,6 +13,7 @@ public class HUD : MonoBehaviour
 	private Color defaultSpeakerNameColor;
 	public Text DialogText = null;
 	public Player Player { get; set; }
+	public IsoCharacterController Controller { get; set; }
 	private float nextKeyDownTime = 0.0f;
 	public float KeyPressInterval = 0.5f;
 	private DialogPlayer dialogPlayer;
@@ -33,9 +34,6 @@ public class HUD : MonoBehaviour
 			this.dialogPlayer = this.gameObject.AddComponent<DialogPlayer>();
 
 		this.dialogPlayer.SectionStarted += this.SectionStarted;
-		this.dialogPlayer.SectionFinished += this.SectionFinished;
-		this.dialogPlayer.StartedPlaying += this.PlayerStarted;
-		this.dialogPlayer.FinishedPlaying += this.PlayerFinished;
 		this.dialogPlayer.TextUpdated += this.TextUpdated;
 		if (this.DialogSpeakerName != null)
 			this.defaultSpeakerNameColor = this.DialogSpeakerName.color;
@@ -72,13 +70,15 @@ public class HUD : MonoBehaviour
 			this.HealthText.text = this.Player.Health.ToString();
 		}
 	}
-	public void ShowDialog(Dialog dialog)
+	#region Dialog
+	public DialogPlayer ShowDialog(Dialog dialog)
 	{
 		this.DialogText.text = string.Empty;
 		this.DialogPanel.enabled = true;
 		this.nextKeyDownTime = Time.time + this.KeyPressInterval;
 		if (this.dialogPlayer.LoadDialog(dialog))
 			this.dialogPlayer.PlayDialog();
+		return this.dialogPlayer;
 	}
 	public void CloseDialog()
 	{
@@ -88,11 +88,22 @@ public class HUD : MonoBehaviour
 		this.DialogSpeakerName.text = string.Empty;
 		this.DialogSpeakerName.color = this.defaultSpeakerNameColor;
 		this.DialogPanel.enabled = false;
+		this.OnDialogFinished(this.dialogPlayer.CurrentDialog);
 	}
 	public bool IsInDialog { get { return this.DialogPanel != null && this.DialogPanel.enabled; } }
 	private bool CanProcessKeyPress { get { return Time.time >= this.nextKeyDownTime; } }
 
-	public void ReceivedQuest(string questName)
+	public delegate void DialogFinishedEventHandler(object sender, Dialog dialog);
+	public DialogFinishedEventHandler DialogFinished;
+	protected void OnDialogFinished(Dialog dialog)
+	{
+		if (this.DialogFinished != null)
+			this.DialogFinished.Invoke(this, dialog);
+	}
+	#endregion
+
+	#region Quests
+	public void ReceivedQuest(Quest quest)
 	{
 		if (!this.QuestPanel)
 			return;
@@ -101,7 +112,7 @@ public class HUD : MonoBehaviour
 			return;
 		var title = this.QuestPanel.GetComponentsInChildren<Text>().First(x => x.name == "QuestTitle");
 		if (title != null)
-			title.text = questName;
+			title.text = quest.Name;
 		var rectTransform = this.questPanelRectTransform;
 		if (!rectTransform)
 			return;
@@ -136,6 +147,7 @@ public class HUD : MonoBehaviour
 		this.QuestPanel.enabled = false;
 		questTween.enabled = false;
 	}
+	#endregion
 
 	#region Events
 	private void SectionStarted(object sender, DialogSection section)
@@ -152,21 +164,6 @@ public class HUD : MonoBehaviour
 		}
 		this.DialogSpeakerName.color = speakerNameColor;
 	}
-
-	private void SectionFinished(object sender, DialogSection section)
-	{
-
-	}
-
-	private void PlayerStarted(object sender)
-	{
-
-	}
-
-	private void PlayerFinished(object sender)
-	{
-	}
-
 	private void TextUpdated(object sender, string updatedText)
 	{
 		if (DialogText != null)

@@ -46,13 +46,12 @@ public class Chest : MonoBehaviour, IInteractable
 		isInAnimation = false;
 		if(this.sender != null)
 		{
-			this.sender.HUD.ReceivedQuest("Test Quest!");
-			//var message = hasBeenOpened ? "This chest is empty." : "You found $20!";
-			//var dialog = new TransientDialog(message);
-			//if (hasBeenOpened)
-			//	this.sender.HUD.ShowDialog(dialog);
-			//else
-			//	this.sender.InventoryAcquiredNotification(dialog);
+			var message = hasBeenOpened ? "This chest is empty." : "You found $20!";
+			var dialog = new TransientDialog(message);
+			if (hasBeenOpened)
+				this.sender.HUD.ShowDialog(dialog);
+			else
+				this.sender.InventoryAcquiredNotification(dialog);
 			this.sender = null;
 		}
 		this.hasBeenOpened = true;

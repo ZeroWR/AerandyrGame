@@ -6,7 +6,7 @@ public class DialogPlayer : MonoBehaviour
 {
     public bool IsPlaying { get { return PlayerState == DialogPlayerState.IsPlaying; } }
 	public bool IsFinishedPlaying { get { return PlayerState == DialogPlayerState.FinishedPlaying; } }
-    private Dialog CurrentDialog { get; set; }
+    public Dialog CurrentDialog { get; protected set; }
     private int CurrentSection { get; set; }
     private int CurrentPlaceInSection { get; set; }
     private string CurrentSectionText { get; set; }

@@ -1,0 +1,40 @@
+{
+	"Name": "Test Quest",
+	"Sections": 
+	[
+		{
+			"Name": "Section 1",
+			"Objectives":
+			[
+				{
+					"Name": "Talk to NPC",
+					"IsDone": false
+				}
+			]
+		},
+		{
+			"Name": "Section 2",
+			"Objectives":
+			[
+				{
+					"Name": "Find key",
+					"IsDone": false
+				},
+				{
+					"Name": "Unlock chest",
+					"IsDone": false
+				}
+			]
+		},
+		{
+			"Name": "Section 3",
+			"Objectives":
+			[
+				{
+					"Name": "Bring thing to Gershigglefertz",
+					"IsDone": false
+				}
+			]
+		}
+	]
+}
