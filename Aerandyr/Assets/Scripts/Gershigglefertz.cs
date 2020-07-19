@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Gershigglefertz : MonoBehaviour, IInteractable
@@ -64,7 +65,8 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 			{
 				if (dialog != ourDialog)
 					return;
-				senderPlayer.HUD.ReceivedQuest(ourQuest);
+				ourQuest.CurrentSection = ourQuest.Sections.First();
+				senderPlayer.ReceivedQuest(ourQuest);
 				senderPlayer.HUD.DialogFinished -= dialogFinishedHandler;
 			};
 			senderPlayer.HUD.DialogFinished += dialogFinishedHandler;

@@ -16,4 +16,6 @@ public class Quest
 	}
 	[IgnoreDataMember]
 	public bool IsDone { get { return Sections.All(x => x.IsDone); } }
+	[IgnoreDataMember]
+	public QuestSection CurrentSection { get; set; }
 }

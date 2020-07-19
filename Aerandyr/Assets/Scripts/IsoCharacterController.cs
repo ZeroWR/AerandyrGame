@@ -21,6 +21,7 @@ public class IsoCharacterController : MonoBehaviour
 	private float nextCanMoveTime = 0.0f;
 	private List<Quest> ourQuests = new List<Quest>();
 	private Quest currentQuest = null;
+	public Quest CurrentQuest { get { return this.currentQuest; } }
 	private void Awake()
 	{
 		rbody = GetComponent<Rigidbody2D>();
@@ -32,7 +33,7 @@ public class IsoCharacterController : MonoBehaviour
 		this.playerCharacter = GetComponent<Player>();
 		this.hud = GetComponent<HUD>();
 		if (this.hud && this.playerCharacter)
-			this.hud.Player = this.playerCharacter;
+			this.hud.Controller = this;
 	}
 
 	private void Update()
@@ -98,10 +99,11 @@ public class IsoCharacterController : MonoBehaviour
 	{
 		if (ourQuests.Contains(quest))
 			return;
-
-		this.HUD.ReceivedQuest(quest);
+		ourQuests.Add(quest);
 		if (this.currentQuest == null)
 			this.currentQuest = quest;
+
+		this.HUD.ReceivedQuest(quest);
 	}
 	#endregion
 

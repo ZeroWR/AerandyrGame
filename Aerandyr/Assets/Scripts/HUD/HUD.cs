@@ -12,7 +12,6 @@ public class HUD : MonoBehaviour
 	public Text DialogSpeakerName = null;
 	private Color defaultSpeakerNameColor;
 	public Text DialogText = null;
-	public Player Player { get; set; }
 	public IsoCharacterController Controller { get; set; }
 	private float nextKeyDownTime = 0.0f;
 	public float KeyPressInterval = 0.5f;
@@ -24,6 +23,7 @@ public class HUD : MonoBehaviour
 	private RectTransform questPanelRectTransform;
 	private UnityEvent questAnimationDoneEvent = new UnityEvent();
 	private EasyTween questTween;
+	public Canvas CurrentQuestPanel = null;
 
 	// Start is called before the first frame update
 	void Start()
@@ -46,6 +46,11 @@ public class HUD : MonoBehaviour
 			this.questTween = this.QuestPanel.GetComponent<EasyTween>();
 			this.questTween.enabled = false;
 		}
+
+		if(this.CurrentQuestPanel)
+		{
+			this.CurrentQuestPanel.enabled = false;
+		}
 		this.questAnimationDoneEvent.AddListener(new UnityAction(this.OnQuestAnimationDone));
 	}
     // Update is called once per frame
@@ -65,9 +70,9 @@ public class HUD : MonoBehaviour
 	}
 	private void UpdateHealthText()
 	{
-		if (this.HealthText != null && this.Player != null)
+		if (this.HealthText != null && this.Controller != null && this.Controller.PlayerCharacter != null)
 		{
-			this.HealthText.text = this.Player.Health.ToString();
+			this.HealthText.text = this.Controller.PlayerCharacter.Health.ToString();
 		}
 	}
 	#region Dialog
@@ -146,6 +151,24 @@ public class HUD : MonoBehaviour
 		this.questPanelRectTransform.anchoredPosition = this.originalQuestPanelPosition;
 		this.QuestPanel.enabled = false;
 		questTween.enabled = false;
+
+		var currentQuest = this.Controller.CurrentQuest;
+		if (currentQuest == null)
+			return;
+		var currentQuestTitle = this.CurrentQuestPanel.GetComponentInChildren<Text>();
+		if (currentQuestTitle != null)
+			currentQuestTitle.text = currentQuest.Name;
+
+		var objectivesPanel = this.CurrentQuestPanel.GetComponentsInChildren<Canvas>().SingleOrDefault(x => x.name == "ObjectivesPanel");
+		if (objectivesPanel == null)
+			return;
+
+		var objectivesController = objectivesPanel.GetComponent<QuestObjectivesController>();
+		if (objectivesController == null)
+			return;
+		objectivesController.Clear();
+		objectivesController.AddRange(currentQuest.CurrentSection.Objectives);
+		this.CurrentQuestPanel.enabled = true;
 	}
 	#endregion
 
