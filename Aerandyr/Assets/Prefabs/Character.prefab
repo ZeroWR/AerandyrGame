@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 449886281}
   - component: {fileID: 449886285}
   - component: {fileID: 449886284}
+  - component: {fileID: 5154684031059864787}
   m_Layer: 0
   m_Name: ObjectivesPanel
   m_TagString: Untagged
@@ -555,11 +556,11 @@ RectTransform:
   m_Father: {fileID: 264752610}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.5, y: -20}
-  m_SizeDelta: {x: -15, y: -40}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 7.5, y: -40}
+  m_SizeDelta: {x: -15, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!223 &449886283
 Canvas:
   m_ObjectHideFlags: 0
@@ -658,6 +659,20 @@ MonoBehaviour:
   prefab: {fileID: 114871079600986500, guid: b2d60db475c378d49aac1af53f8e1d4d, type: 3}
   maxPoolSize: 0
   startingPoolSize: 0
+--- !u!114 &5154684031059864787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449886279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &453107114
 GameObject:
   m_ObjectHideFlags: 0

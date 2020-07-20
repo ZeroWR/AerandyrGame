@@ -97,6 +97,12 @@ public class DialogPlayer : MonoBehaviour
 			return;
 		}
 		PlayerState = DialogPlayerState.IsPlaying;
+		if(CurrentSection >= CurrentDialog.Sections.Count)
+		{
+			PlayerState = DialogPlayerState.FinishedPlaying;
+			CancelInvoke("PlayCurrentSection");
+			return;
+		}
 		DialogSection ourCurrentSection = CurrentDialog.Sections[CurrentSection];
 		if(CurrentPlaceInSection == 0 && ourCurrentSection.SectionText.Length > 0)
 		{

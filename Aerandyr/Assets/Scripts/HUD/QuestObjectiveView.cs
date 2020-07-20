@@ -26,7 +26,14 @@ public class QuestObjectiveView : UIListItemViewBase<QuestObjective>
 	}
 	public override void Refresh()
 	{
-		toggleText.text = model.Name;
-		toggleField.isOn = model.IsDone;
+		if(toggleText.text != model.Name)
+			toggleText.text = model.Name;
+		if(toggleField.isOn != model.IsDone)
+			toggleField.isOn = model.IsDone;
+	}
+
+	private void Update()
+	{
+		Refresh();
 	}
 }

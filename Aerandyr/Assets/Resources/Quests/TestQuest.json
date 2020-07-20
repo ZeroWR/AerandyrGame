@@ -7,7 +7,7 @@
 			"Objectives":
 			[
 				{
-					"Name": "Talk to NPC",
+					"Name": "Talk to Gershigglefertz's Twin",
 					"IsDone": false
 				}
 			]
@@ -17,7 +17,7 @@
 			"Objectives":
 			[
 				{
-					"Name": "Find key",
+					"Name": "Find the chest",
 					"IsDone": false
 				},
 				{
@@ -31,7 +31,7 @@
 			"Objectives":
 			[
 				{
-					"Name": "Bring thing to Gershigglefertz",
+					"Name": "Bring the item back to Gershigglefertz",
 					"IsDone": false
 				}
 			]
