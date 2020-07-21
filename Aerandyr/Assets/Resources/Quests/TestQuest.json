@@ -35,6 +35,16 @@
 					"IsDone": false
 				}
 			]
+		},
+		{
+			"Name": "Section 4",
+			"Objectives":
+			[
+				{
+					"Name": "Collect your reward",
+					"IsDone": false
+				}
+			]
 		}
 	]
 }

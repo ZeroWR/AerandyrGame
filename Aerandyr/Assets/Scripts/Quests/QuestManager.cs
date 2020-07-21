@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -14,16 +15,17 @@ public class QuestManager : MonoBehaviour
 		this.Quests = new List<Quest>();
 	}
 	// Start is called before the first frame update
-	void Start()
-    {
-		this.LoadQuests();
-    }
+	//void Start()
+ //   {
+	//	this.LoadQuests();
+	//}
 	void Awake()
 	{
 		DontDestroyOnLoad(gameObject);
 		if (instance == null)
 		{
 			instance = this;
+			this.LoadQuests();
 		}
 		else
 		{
@@ -43,5 +45,9 @@ public class QuestManager : MonoBehaviour
 
 			Quests.Add(quest);
 		}
+	}
+	public Quest GetQuest(string name)
+	{
+		return this.Quests.SingleOrDefault(x => x.Name == name);
 	}
 }

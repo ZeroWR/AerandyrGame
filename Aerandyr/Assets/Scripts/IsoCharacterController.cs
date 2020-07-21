@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class IsoCharacterController : MonoBehaviour
@@ -76,11 +77,11 @@ public class IsoCharacterController : MonoBehaviour
 
 	#region Dialog/HUD
 	private bool IsInDialog { get { return this.HUD != null && this.HUD.IsInDialog; } }
-	public void InventoryAcquiredNotification(Dialog dialog)
+	public Task<bool> InventoryAcquiredNotification(Dialog dialog)
 	{
 		if (this.isInCutscene)
-			return;
-
+			return Task.FromResult(false);
+		var tcs = new TaskCompletionSource<bool>();
 		this.isInCutscene = true;
 		this.animationController.IsFacingForwards = true;
 		EventHandler<AnimationArgs> animationDoneCallback = null;
@@ -91,9 +92,11 @@ public class IsoCharacterController : MonoBehaviour
 			this.HUD.ShowDialog(dialog);
 			this.animationController.AnimationDone -= animationDoneCallback;
 			this.isInCutscene = false;
+			tcs.SetResult(true);
 		};
 		this.animationController.AnimationDone += animationDoneCallback;
 		this.animationController.PlayWinAnimation();
+		return tcs.Task;
 	}
 	public void ReceivedQuest(Quest quest)
 	{
@@ -104,6 +107,10 @@ public class IsoCharacterController : MonoBehaviour
 			this.currentQuest = quest;
 
 		this.HUD.ReceivedQuest(quest);
+	}
+	public bool HasQuest(Quest quest)
+	{
+		return this.ourQuests.Contains(quest);
 	}
 	#endregion
 

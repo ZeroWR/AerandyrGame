@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour, IInteractable
 {
-	private Animator animator;
-	private bool isOpen = false;
-	private bool isInAnimation = false;
-	private IsoCharacterController sender = null;
-	private bool hasBeenOpened = false;
+	protected Animator animator;
+	protected bool isOpen = false;
+	protected bool isInAnimation = false;
+	protected IsoCharacterController sender = null;
+	protected bool hasBeenOpened = false;
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
 		animator = GetComponent<Animator>();
     }
@@ -22,14 +22,19 @@ public class Chest : MonoBehaviour, IInteractable
 		else
 			Open();
 	}
-	public bool CanInteract(Object sender)
+	public virtual bool CanInteract(Object sender)
 	{
-		return sender is IsoCharacterController;
+		return sender is IsoCharacterController && !isInAnimation;
 	}
 	private void Open()
 	{
 		if (animator == null || isOpen || isInAnimation)
 			return;
+		if (this.IsLocked)
+		{
+			this.sender.HUD.ShowDialog(new TransientDialog("This chest is locked."));
+			return;
+		}
 		isInAnimation = true;
 		animator.SetBool("IsOpen", true);
 	}
@@ -40,26 +45,30 @@ public class Chest : MonoBehaviour, IInteractable
 		isInAnimation = true;
 		animator.SetBool("IsOpen", false);
 	}
+	protected virtual void ChestOpened()
+	{
+		this.ClearSender();
+	}
+	protected virtual void ChestClosed()
+	{
+		this.ClearSender();
+	}
+	protected virtual bool IsLocked { get { return false; } }
 	public void OnOpenAnimationEnded()
 	{
 		isOpen = true;
 		isInAnimation = false;
-		if(this.sender != null)
-		{
-			var message = hasBeenOpened ? "This chest is empty." : "You found $20!";
-			var dialog = new TransientDialog(message);
-			if (hasBeenOpened)
-				this.sender.HUD.ShowDialog(dialog);
-			else
-				this.sender.InventoryAcquiredNotification(dialog);
-			this.sender = null;
-		}
+		this.ChestOpened();
 		this.hasBeenOpened = true;
 	}
 	public void OnCloseAnimationEnded()
 	{
 		isOpen = false;
 		isInAnimation = false;
+		this.ChestClosed();
+	}
+	protected void ClearSender()
+	{
 		this.sender = null;
 	}
 }

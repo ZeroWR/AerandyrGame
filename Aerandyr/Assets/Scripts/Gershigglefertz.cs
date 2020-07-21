@@ -50,32 +50,47 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 	}
 	public virtual void Interact(Object sender)
 	{
-		if(sender is IsoCharacterController)
-		{
-			var senderPlayer = sender as IsoCharacterController;
-			//This sucks.  Have to do this because Start() isn't called in any order.
-			if (this.ourDialog == null)
-				InitDialog();
-			if (this.ourQuest == null)
-				InitQuest();
-			if (!senderPlayer.HUD || this.ourDialog == null || this.ourQuest == null)
-				return;
+		if (!(sender is IsoCharacterController))
+			return;
+		var senderPlayer = sender as IsoCharacterController;
+		//This sucks.  Have to do this because Start() isn't called in any order.
+		if (this.ourDialog == null)
+			InitDialog();
+		if (this.ourQuest == null)
+			InitQuest();
+		if (!senderPlayer.HUD || this.ourDialog == null || this.ourQuest == null)
+			return;
 
-			var dialogPlayer = senderPlayer.HUD.ShowDialog(this.ourDialog);
-			HUD.DialogFinishedEventHandler dialogFinishedHandler = null;
-			dialogFinishedHandler = (s, dialog) =>
-			{
-				if (dialog != ourDialog)
-					return;
-				if (senderPlayer.CurrentQuest != ourQuest)
-				{
-					ourQuest.CurrentSection = ourQuest.Sections.First();
-					senderPlayer.ReceivedQuest(ourQuest);
-				}
-				senderPlayer.HUD.DialogFinished -= dialogFinishedHandler;
-			};
-			senderPlayer.HUD.DialogFinished += dialogFinishedHandler;
+		var isInPart2 = ourQuest.CurrentSection == ourQuest.Sections[2];
+		if (senderPlayer.CurrentQuest == ourQuest && !isInPart2)
+		{
+			senderPlayer.HUD.ShowDialog(new TransientDialog("Please talk to my brother."));
+			return;
 		}
+		
+		var dialogToPlay = (isInPart2 && !ourQuest.CurrentSection.Objectives[0].IsDone) ? Interactions.Instance.GetDialog(this.dialogName + "Part2") : this.ourDialog;
+
+		if(isInPart2)
+			ourQuest.CurrentSection.Objectives[0].IsDone = true;
+
+		var dialogPlayer = senderPlayer.HUD.ShowDialog(dialogToPlay);
+		HUD.DialogFinishedEventHandler dialogFinishedHandler = null;
+		dialogFinishedHandler = (s, dialog) =>
+		{
+			if (dialog != dialogToPlay)
+				return;
+			if (senderPlayer.CurrentQuest != ourQuest)
+			{
+				ourQuest.CurrentSection = ourQuest.Sections.First();
+				senderPlayer.ReceivedQuest(ourQuest);
+			}
+			else if(isInPart2)
+			{
+				ourQuest.CurrentSection = ourQuest.Sections[3];
+			}
+			senderPlayer.HUD.DialogFinished -= dialogFinishedHandler;
+		};
+		senderPlayer.HUD.DialogFinished += dialogFinishedHandler;
 	}
 	public bool CanInteract(Object sender)
 	{
