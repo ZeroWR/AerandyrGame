@@ -15,7 +15,7 @@ public class SaveTileAsPNG
 	[MenuItem("Assets/Save Tile As PNG", validate = true)]
 	private static bool CanSaveSelectedTileAsPNG()
 	{
-		return Selection.activeObject.GetType() == typeof(UnityEngine.Tilemaps.Tile);
+		return Selection.activeObject != null && Selection.activeObject.GetType() == typeof(UnityEngine.Tilemaps.Tile);
 	}
 	[MenuItem("CONTEXT/TileSet/Save Tile As PNG")]
 	private static void ContextSaveSelectedTileAsPNG(MenuCommand menuCommand)

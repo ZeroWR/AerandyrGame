@@ -1,0 +1,30 @@
+{
+	"Name": "GershigglefertzTwin",
+	"Sections": 
+	[
+		{
+			"Icon": null,
+			"SpeakerName": "Gershigglefertz's Twin",
+			"SpeakerNameColor": "#44c136",
+			"SectionText": "'Sup?"
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Player",
+			"SpeakerNameColor": "#8389a6",
+			"SectionText": "Your brother said you have something of his that he needs back."
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Gershigglefertz's Twin",
+			"SpeakerNameColor": "#44c136",
+			"SectionText": "Oh, yeah.  It's in a chest around here somewhere.  Here's the key."
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Player",
+			"SpeakerNameColor": "#8389a6",
+			"SectionText": "Thank you."
+		}
+	]
+}

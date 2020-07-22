@@ -1,0 +1,48 @@
+{
+	"Name": "Gershigglefertz",
+	"Sections": 
+	[
+		{
+			"Icon": null,
+			"SpeakerName": "Gershigglefertz",
+			"SpeakerNameColor": "#44c136",
+			"SectionText": "I am Gershigglefertz.\n\n\nPleased to meet you."
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Player",
+			"SpeakerNameColor": "#8389a6",
+			"SectionText": "I am the player. Nice to meet you, as well."
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Gershigglefertz",
+			"SpeakerNameColor": "#44c136",
+			"SectionText": "Would you mind doing a simple fetch quest for me, please?"
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Gershigglefertz",
+			"SpeakerNameColor": "#44c136",
+			"SectionText": "I need you to find my twin brother.  He's in the town North of here.  He has something of mine that I need returned."
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Player",
+			"SpeakerNameColor": "#8389a6",
+			"SectionText": "...Um..."
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Gershigglefertz",
+			"SpeakerNameColor": "#44c136",
+			"SectionText": "...I'll give you $20."
+		},
+		{
+			"Icon": null,
+			"SpeakerName": "Player",
+			"SpeakerNameColor": "#8389a6",
+			"SectionText": "Fine."
+		}
+	]
+}

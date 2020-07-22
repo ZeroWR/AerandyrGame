@@ -1,0 +1,50 @@
+{
+	"Name": "Test Quest",
+	"Sections": 
+	[
+		{
+			"Name": "Section 1",
+			"Objectives":
+			[
+				{
+					"Name": "Talk to Gershigglefertz's Twin",
+					"IsDone": false
+				}
+			]
+		},
+		{
+			"Name": "Section 2",
+			"Objectives":
+			[
+				{
+					"Name": "Find the chest",
+					"IsDone": false
+				},
+				{
+					"Name": "Unlock chest",
+					"IsDone": false
+				}
+			]
+		},
+		{
+			"Name": "Section 3",
+			"Objectives":
+			[
+				{
+					"Name": "Bring the item back to Gershigglefertz",
+					"IsDone": false
+				}
+			]
+		},
+		{
+			"Name": "Section 4",
+			"Objectives":
+			[
+				{
+					"Name": "Collect your reward",
+					"IsDone": false
+				}
+			]
+		}
+	]
+}

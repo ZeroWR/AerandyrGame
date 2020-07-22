@@ -3,7 +3,6 @@ using System.Collections;
 
 public class BasicCameraFollow : MonoBehaviour 
 {
-
 	private Vector3 startingPosition;
 	public Transform followTarget;
 	private Vector3 targetPos;
@@ -12,6 +11,12 @@ public class BasicCameraFollow : MonoBehaviour
 	void Start()
 	{
 		startingPosition = transform.position;
+		var camera = GetComponent<Camera>();
+		if(camera != null)
+		{
+			camera.transparencySortMode = TransparencySortMode.CustomAxis;
+			camera.transparencySortAxis = new Vector3(0.0f, 1.0f, 0.0f);
+		}
 	}
 
 	void Update () 
