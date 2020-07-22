@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Utils;
 
 public class GChest : Chest
 {
@@ -27,11 +28,12 @@ public class GChest : Chest
 			this.sender.HUD.ShowDialog(dialog);
 		else
 		{
-			this.sender.InventoryAcquiredNotification(dialog).ContinueWith
+			this.sender.InventoryAcquiredNotification(dialog).ContinueWithOnMainThread
 				(
 					(e) =>
 					{
 						ourQuestSection.Objectives[0].IsDone = true;
+						this.sender.HUD.QuestCompleted(ourQuest);
 						this.ClearSender();
 						//TODO: Quest Completed here.
 					}
