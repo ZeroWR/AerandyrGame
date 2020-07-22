@@ -133,6 +133,14 @@ public class HUD : MonoBehaviour
 	#region Quests
 	public void ReceivedQuest(Quest quest)
 	{
+		PlayQuestNotification(quest, false);
+	}
+	public void QuestCompleted(Quest quest)
+	{
+		PlayQuestNotification(quest, true);
+	}
+	private void PlayQuestNotification(Quest quest, bool isCompleted)
+	{
 		if (!this.QuestPanel)
 			return;
 		this.QuestPanel.enabled = true;
@@ -141,6 +149,9 @@ public class HUD : MonoBehaviour
 		var title = this.QuestPanel.GetComponentsInChildren<Text>().First(x => x.name == "QuestTitle");
 		if (title != null)
 			title.text = quest.Name;
+		var questCompleteText = this.QuestPanel.GetComponentsInChildren<Text>().First(x => x.name == "QuestComplete");
+		if (questCompleteText != null)
+			questCompleteText.enabled = isCompleted;
 		var rectTransform = this.questPanelRectTransform;
 		if (!rectTransform)
 			return;
@@ -176,12 +187,12 @@ public class HUD : MonoBehaviour
 		questTween.enabled = false;
 
 		var currentQuest = this.Controller.CurrentQuest;
+		this.CurrentQuestPanel.enabled = (currentQuest != null && !currentQuest.IsDone);
 		if (currentQuest == null)
 			return;
 		var currentQuestTitle = this.CurrentQuestPanel.GetComponentInChildren<Text>();
 		if (currentQuestTitle != null)
 			currentQuestTitle.text = currentQuest.Name;
-		this.CurrentQuestPanel.enabled = true;
 	}
 	#endregion
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Scripts.Utils;
 
 public class GTwinChest : Chest
 {
@@ -41,7 +42,7 @@ public class GTwinChest : Chest
 			this.sender.HUD.ShowDialog(dialog);
 		else
 		{
-			this.sender.InventoryAcquiredNotification(dialog).ContinueWith
+			this.sender.InventoryAcquiredNotification(dialog).ContinueWithOnMainThread
 				(
 					(e) =>
 					{
