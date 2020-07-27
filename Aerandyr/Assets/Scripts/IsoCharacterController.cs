@@ -15,8 +15,7 @@ public class IsoCharacterController : MonoBehaviour
 	public GameObject SwordDamageTrigger = null;
 	private Player playerCharacter = null;
 	public Player PlayerCharacter { get { return playerCharacter; } }
-	private HUD hud = null;
-	public HUD HUD { get { return hud; } }
+	public HUD HUD;
 	private bool isInCutscene = false;
 	private bool canMove = true;
 	private float nextCanMoveTime = 0.0f;
@@ -32,9 +31,12 @@ public class IsoCharacterController : MonoBehaviour
 			animationController.AnimationEvent += AnimationController_AnimationEvent;
 		}
 		this.playerCharacter = GetComponent<Player>();
-		this.hud = GetComponent<HUD>();
-		if (this.hud && this.playerCharacter)
-			this.hud.Controller = this;
+		if(this.HUD == null)
+		{
+			this.HUD = GetComponentInChildren<HUD>();
+			if (this.HUD)
+				this.HUD.Controller = this;
+		}
 	}
 
 	private void Update()
