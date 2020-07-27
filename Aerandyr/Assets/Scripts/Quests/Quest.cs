@@ -9,6 +9,7 @@ using UnityEngine;
 public class Quest 
 {
 	public string Name;
+	public string Description;
 	public List<QuestSection> Sections;
 	public Quest()
 	{
