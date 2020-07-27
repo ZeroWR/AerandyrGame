@@ -10,6 +10,7 @@ public class Quest
 {
 	public string Name;
 	public string Description;
+	public string Location;
 	public List<QuestSection> Sections;
 	public Quest()
 	{
