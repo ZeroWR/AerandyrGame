@@ -4,4 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SquareTileScene - mark.unity
+    guid: a098bfcb6371fa74d9f0c3b5ba10b1a5
+  - enabled: 1
+    path: Assets/Scenes/ContainerHouseInternal.unity
+    guid: ef9d131a2d5c83b45b79c794f5314de9
+  - enabled: 1
+    path: Assets/Scenes/SquareTileScene.unity
+    guid: 6c65edb5f79fedf45a01498948d0789c
+  m_configObjects: {}

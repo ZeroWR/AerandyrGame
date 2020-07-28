@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class IsoCharacterController : MonoBehaviour
 {
+	private static int controllerCount = 0;
+	private int controllerId = 0;
+	public int ControllerId { get { return controllerId; } }
 	public float movementSpeed = 1f;
 	private Rigidbody2D rbody;
 	private PlayerAnimationController animationController;
@@ -24,6 +27,8 @@ public class IsoCharacterController : MonoBehaviour
 	public Quest CurrentQuest { get { return this.currentQuest; } }
 	private void Awake()
 	{
+		controllerCount++;
+		this.controllerId = controllerCount;
 		rbody = GetComponent<Rigidbody2D>();
 		animationController = GetComponent<PlayerAnimationController>();
 		if(animationController != null)

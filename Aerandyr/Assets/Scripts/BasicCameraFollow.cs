@@ -4,7 +4,7 @@ using System.Collections;
 public class BasicCameraFollow : MonoBehaviour 
 {
 	private Vector3 startingPosition;
-	public Transform followTarget;
+	public GameObject followTarget;
 	private Vector3 targetPos;
 	public float moveSpeed;
 	
@@ -23,10 +23,16 @@ public class BasicCameraFollow : MonoBehaviour
 	{
 		if(followTarget != null)
 		{
-			targetPos = new Vector3(followTarget.position.x, followTarget.position.y, transform.position.z);
+			var targetTransform = followTarget.transform;
+			targetPos = new Vector3(targetTransform.position.x, targetTransform.position.y, transform.position.z);
 			Vector3 velocity = (targetPos - transform.position) * moveSpeed;
 			transform.position = Vector3.SmoothDamp (transform.position, targetPos, ref velocity, 1.0f, Time.deltaTime);
 		}
+	}
+
+	public void SnapToTarget()
+	{
+		this.transform.position = new Vector3(followTarget.transform.position.x, followTarget.transform.position.y, transform.position.z);
 	}
 }
 

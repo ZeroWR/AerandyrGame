@@ -14,11 +14,6 @@ public class QuestManager : MonoBehaviour
 	{
 		this.Quests = new List<Quest>();
 	}
-	// Start is called before the first frame update
-	//void Start()
- //   {
-	//	this.LoadQuests();
-	//}
 	void Awake()
 	{
 		DontDestroyOnLoad(gameObject);
