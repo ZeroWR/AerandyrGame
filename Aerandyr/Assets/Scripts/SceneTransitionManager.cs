@@ -41,7 +41,6 @@ public class SceneTransitionManager : MonoBehaviour
 			}
 			var targetSpawnPoint = spawnPoints.FirstOrDefault(x => x.Name == spawnPoint);
 			var spawnPointToSpawnAt = targetSpawnPoint != null ? targetSpawnPoint : spawnPoints.First();
-			Debug.Log($"Spawning at spawn point {spawnPointToSpawnAt.Name} at position {spawnPointToSpawnAt.transform.position.ToString()}");
 			player.transform.position = spawnPointToSpawnAt.transform.position;
 
 			var cameras = FindObjectsOfType<BasicCameraFollow>();
@@ -55,17 +54,12 @@ public class SceneTransitionManager : MonoBehaviour
 			}
 
 			var characters = FindObjectsOfType<IsoCharacterController>();
-			Debug.Log($"Found {characters.Length} characters.");
 			var destroyCharacters = characters.Where(x => x.gameObject != player);
-			Debug.Log($"Found {destroyCharacters.Count()} characters to destroy.");
 			foreach (var destroyCharacter in destroyCharacters)
 			{
-				Debug.Log($"Destroying character with controller id {destroyCharacter.ControllerId}");
 				Destroy(destroyCharacter.gameObject);
 			}
 		};
-		var currentPlayerController = player.GetComponent<IsoCharacterController>();
-		Debug.Log($"Loading scene {sceneName} and spawning at {spawnPoint} for controller {currentPlayerController.ControllerId}");
 		SceneManager.sceneLoaded += callback;
 		SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 	}
