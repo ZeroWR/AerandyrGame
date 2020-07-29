@@ -94,6 +94,11 @@ public class IsoCharacterController : MonoBehaviour
 	}
 
 	#region Dialog/HUD
+	public void ShowDialog(Dialog dialog)
+	{
+		this.rbody.velocity = Vector2.zero;
+		this.HUD.ShowDialog(dialog);
+	}
 	private bool IsInDialog { get { return this.HUD != null && this.HUD.IsInDialog; } }
 	public Task<bool> InventoryAcquiredNotification(Dialog dialog)
 	{
@@ -102,12 +107,13 @@ public class IsoCharacterController : MonoBehaviour
 		var tcs = new TaskCompletionSource<bool>();
 		this.isInCutscene = true;
 		this.animationController.IsFacingForwards = true;
+		this.rbody.velocity = Vector2.zero;
 		EventHandler<AnimationArgs> animationDoneCallback = null;
 		animationDoneCallback = (object sender, AnimationArgs e) =>
 		{
 			if (e.Animation != CharacterAnimations.Win)
 				return;
-			this.HUD.ShowDialog(dialog);
+			this.ShowDialog(dialog);
 			this.animationController.AnimationDone -= animationDoneCallback;
 			this.isInCutscene = false;
 			tcs.SetResult(true);

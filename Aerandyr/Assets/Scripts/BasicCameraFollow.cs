@@ -17,6 +17,16 @@ public class BasicCameraFollow : MonoBehaviour
 			camera.transparencySortMode = TransparencySortMode.CustomAxis;
 			camera.transparencySortAxis = new Vector3(0.0f, 1.0f, 0.0f);
 		}
+
+		if(!followTarget)
+		{
+			var characterController = FindObjectOfType<IsoCharacterController>();
+			if(characterController != null)
+			{
+				followTarget = characterController.gameObject;
+			}
+		}
+		SnapToTarget();
 	}
 
 	void Update () 

@@ -24,7 +24,7 @@ public class GershigglefertzTwin : Gershigglefertz
 		if (!senderPlayer.HUD || this.ourDialog == null || this.ourQuest == null)
 			return;
 
-		var dialogPlayer = senderPlayer.HUD.ShowDialog(this.ourDialog);
+		senderPlayer.ShowDialog(this.ourDialog);
 		ourQuest.CurrentSection.Objectives[0].IsDone = true;
 		HUD.DialogFinishedEventHandler dialogFinishedHandler = null;
 		dialogFinishedHandler = (s, dialog) =>

@@ -32,7 +32,7 @@ public class Chest : MonoBehaviour, IInteractable
 			return;
 		if (this.IsLocked)
 		{
-			this.sender.HUD.ShowDialog(new TransientDialog("This chest is locked."));
+			this.sender.ShowDialog(new TransientDialog("This chest is locked."));
 			return;
 		}
 		isInAnimation = true;

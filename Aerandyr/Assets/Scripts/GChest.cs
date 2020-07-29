@@ -25,7 +25,7 @@ public class GChest : Chest
 		var message = hasBeenOpened ? "This chest is empty." : "You found $20!";
 		var dialog = new TransientDialog(message);
 		if (hasBeenOpened)
-			this.sender.HUD.ShowDialog(dialog);
+			this.sender.ShowDialog(dialog);
 		else
 		{
 			this.sender.InventoryAcquiredNotification(dialog).ContinueWithOnMainThread
