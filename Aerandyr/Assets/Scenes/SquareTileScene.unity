@@ -1949,23 +1949,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
-    - target: {fileID: 5899534148665067815, guid: 7901ebd11e018bb40afea2b01a11f06d,
-        type: 3}
-      propertyPath: HUD
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899534148665067815, guid: 7901ebd11e018bb40afea2b01a11f06d,
-        type: 3}
-      propertyPath: HUDPrefab
-      value: 
-      objectReference: {fileID: 8849807588075822068, guid: 2aefb135e8c93cb469c7f3ba63cce3ee,
-        type: 3}
-    - target: {fileID: 5899534148665067815, guid: 7901ebd11e018bb40afea2b01a11f06d,
-        type: 3}
-      propertyPath: PauseMenuPrefab
-      value: 
-      objectReference: {fileID: 1293671737510048652, guid: d4eb659a20592044a8f91e00e4bf4e31,
-        type: 3}
     - target: {fileID: 6804640992336484461, guid: 7901ebd11e018bb40afea2b01a11f06d,
         type: 3}
       propertyPath: m_LocalPosition.x
