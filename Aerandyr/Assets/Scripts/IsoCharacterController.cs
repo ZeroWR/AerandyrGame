@@ -9,6 +9,8 @@ public class IsoCharacterController : MonoBehaviour
 	private static int controllerCount = 0;
 	private int controllerId = 0;
 	public int ControllerId { get { return controllerId; } }
+
+	//There are too many members in this class.  Need to break some out.
 	public float movementSpeed = 1f;
 	private Rigidbody2D rbody;
 	private PlayerAnimationController animationController;
@@ -18,13 +20,16 @@ public class IsoCharacterController : MonoBehaviour
 	public GameObject SwordDamageTrigger = null;
 	private Player playerCharacter = null;
 	public Player PlayerCharacter { get { return playerCharacter; } }
-	public HUD HUD;
+	public HUD HUD { get; protected set; }
 	private bool isInCutscene = false;
 	private bool canMove = true;
 	private float nextCanMoveTime = 0.0f;
 	private List<Quest> ourQuests = new List<Quest>();
 	private Quest currentQuest = null;
 	public Quest CurrentQuest { get { return this.currentQuest; } }
+
+	public HUD HUDPrefab;
+	public PauseMenu PauseMenuPrefab;
 	private void Awake()
 	{
 		controllerCount++;
@@ -36,6 +41,12 @@ public class IsoCharacterController : MonoBehaviour
 			animationController.AnimationEvent += AnimationController_AnimationEvent;
 		}
 		this.playerCharacter = GetComponent<Player>();
+		if(this.HUDPrefab != null)
+		{
+			this.HUD = Instantiate<HUD>(HUDPrefab);
+			this.HUD.transform.parent = this.gameObject.transform;
+			this.HUD.Controller = this;
+		}
 		if(this.HUD == null)
 		{
 			this.HUD = GetComponentInChildren<HUD>();
