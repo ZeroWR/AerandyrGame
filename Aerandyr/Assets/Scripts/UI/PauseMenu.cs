@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
 	public PauseMenuScreen[] ScreensDefinitions;
 	private List<PauseMenuScreen> screens = new List<PauseMenuScreen>();
 	public Canvas ScreenContainer;
+	public Text ScreenTitle;
 	protected IsoCharacterController controller;
 	public IsoCharacterController Controller
 	{
@@ -77,7 +79,12 @@ public class PauseMenu : MonoBehaviour
 		this.enabled = true;
 		if (screens.Count > 0)
 		{
-			screens.First().Show();
+			var firstScreen = screens.First();
+			firstScreen.Show();
+			if(this.ScreenTitle != null)
+			{
+				this.ScreenTitle.text = firstScreen.Title;
+			}
 		}
 	}
 	public void Hide()
