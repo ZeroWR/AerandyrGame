@@ -185,8 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64cc0bcc0c248964f81aca05c71cd6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Screens:
+  ScreensDefinitions:
   - {fileID: 7930218762908233368, guid: 19cc216cca9ee6e4fba32e936b19bc79, type: 3}
+  ScreenContainer: {fileID: 1293671738195744293}
 --- !u!1 &1293671738195744297
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +200,7 @@ GameObject:
   - component: {fileID: 1293671738195744293}
   - component: {fileID: 1293671738195744292}
   - component: {fileID: 1293671738195744299}
+  - component: {fileID: 2505557316353757054}
   m_Layer: 0
   m_Name: ScreenContainer
   m_TagString: Untagged
@@ -285,3 +287,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2505557316353757054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293671738195744297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 0

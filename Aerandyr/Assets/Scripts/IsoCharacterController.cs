@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -25,8 +26,11 @@ public class IsoCharacterController : MonoBehaviour
 	private bool canMove = true;
 	private float nextCanMoveTime = 0.0f;
 	private List<Quest> ourQuests = new List<Quest>();
+	public ReadOnlyCollection<Quest> Quests { get { return ourQuests.AsReadOnly(); } }
 	private Quest currentQuest = null;
 	public Quest CurrentQuest { get { return this.currentQuest; } }
+	private PauseMenu pauseMenu;
+	private float nextUIKeyDownTime = 0.0f;
 
 	public HUD HUDPrefab;
 	public PauseMenu PauseMenuPrefab;
@@ -52,6 +56,13 @@ public class IsoCharacterController : MonoBehaviour
 			this.HUD = GetComponentInChildren<HUD>();
 			if (this.HUD)
 				this.HUD.Controller = this;
+		}
+		if (this.PauseMenuPrefab != null)
+		{
+			this.pauseMenu = Instantiate(PauseMenuPrefab);
+			this.pauseMenu.transform.parent = this.gameObject.transform;
+			this.pauseMenu.Controller = this;
+			this.pauseMenu.Hide();
 		}
 	}
 
@@ -79,6 +90,10 @@ public class IsoCharacterController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			DoAttack();
+		}
+		if(Input.GetButtonDown("Pause"))
+		{
+			TogglePauseMenu();
 		}
 	}
 
@@ -135,6 +150,19 @@ public class IsoCharacterController : MonoBehaviour
 	public bool HasQuest(Quest quest)
 	{
 		return this.ourQuests.Contains(quest);
+	}
+	private bool CanTogglePauseMenu
+	{
+		get { return nextUIKeyDownTime <= Time.time; }
+	}
+	private void TogglePauseMenu()
+	{
+		if (!this.pauseMenu || !CanTogglePauseMenu)
+			return;
+
+		this.pauseMenu.Toggle();
+		this.HUD.gameObject.SetActive(!this.pauseMenu.enabled);
+		nextUIKeyDownTime = Time.time + 0.25f;
 	}
 	#endregion
 

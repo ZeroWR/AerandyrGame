@@ -311,7 +311,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 5, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 550, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!223 &7930218762723656034
 Canvas:
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
 --- !u!114 &7930218762723656035
 MonoBehaviour:
@@ -558,3 +558,4 @@ MonoBehaviour:
   Title: Quest Log
   questSelectionManager: {fileID: 7930218762723656038}
   questDetails: {fileID: 7930218761471537891}
+  questsController: {fileID: 7930218762723656033}

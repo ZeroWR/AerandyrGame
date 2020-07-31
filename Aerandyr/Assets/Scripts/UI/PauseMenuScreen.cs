@@ -5,6 +5,7 @@ using UnityEngine;
 public class PauseMenuScreen : MonoBehaviour
 {
 	public string Title;
+	protected IsoCharacterController controller;
 	// Start is called before the first frame update
 	protected virtual void Start()
     {
@@ -16,4 +17,10 @@ public class PauseMenuScreen : MonoBehaviour
     {
         
     }
+	public virtual void SetController(IsoCharacterController controller)
+	{
+		this.controller = controller;
+	}
+	public virtual void Show() { this.enabled = true; }
+	public virtual void Hide() { this.enabled = false; }
 }
