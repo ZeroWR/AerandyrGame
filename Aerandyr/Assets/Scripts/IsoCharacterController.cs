@@ -2,11 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
+public class InventoryItem
+{
+	public ItemDefinition ItemDefintion { get; set; }
+	public int Quantity { get; set; }
+}
+
 public class IsoCharacterController : MonoBehaviour
 {
+	#region Properties And Members
 	private static int controllerCount = 0;
 	private int controllerId = 0;
 	public int ControllerId { get { return controllerId; } }
@@ -34,6 +42,10 @@ public class IsoCharacterController : MonoBehaviour
 
 	public HUD HUDPrefab;
 	public PauseMenu PauseMenuPrefab;
+
+	private List<InventoryItem> Inventory { get; set; }
+	#endregion
+
 	private void Awake()
 	{
 		controllerCount++;
@@ -64,6 +76,7 @@ public class IsoCharacterController : MonoBehaviour
 			this.pauseMenu.Controller = this;
 			this.pauseMenu.Hide();
 		}
+		Inventory = new List<InventoryItem>();
 	}
 
 	private void Update()
@@ -97,6 +110,31 @@ public class IsoCharacterController : MonoBehaviour
 		}
 	}
 
+	#region Pickups/Inventory
+	public bool CanPickUpItem(ItemDefinition itemDefinition, int quantity)
+	{
+		var existingInventoryItem = this.Inventory.Find(x => x.ItemDefintion.ID == itemDefinition.ID);
+		if (existingInventoryItem == null)
+			return true;
+
+		return itemDefinition.MaxCarry < 0 ? true : existingInventoryItem.Quantity + quantity <= itemDefinition.MaxCarry;
+	}
+	public void PickupItem(ItemDefinition itemDefinition, int quantity)
+	{
+		var existingInventoryItem = this.Inventory.Find(x => x.ItemDefintion.ID == itemDefinition.ID);
+		if(existingInventoryItem == null)
+		{
+			existingInventoryItem = new InventoryItem()
+			{
+				ItemDefintion = itemDefinition
+			};
+			Inventory.Add(existingInventoryItem);
+		}
+		existingInventoryItem.Quantity += quantity;
+	}
+	#endregion
+
+	#region TakeDamage
 	public void TakeDamage(GameObject sender, int damage, Vector2 force)
 	{
 		this.nextCanMoveTime = Time.time + 0.25f;
@@ -107,6 +145,7 @@ public class IsoCharacterController : MonoBehaviour
 			this.animationController.PlayHurtAnimation();
 		}
 	}
+	#endregion
 
 	#region Dialog/HUD
 	public void ShowDialog(Dialog dialog)
