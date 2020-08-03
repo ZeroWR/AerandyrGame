@@ -23,6 +23,7 @@ public class PauseMenu : MonoBehaviour
 			}
 		}
 	}
+	private PauseMenuScreen activeScreen = null;
 	private void Awake()
 	{
 		var screenContainerRect = this.ScreenContainer.GetComponent<RectTransform>();
@@ -54,10 +55,6 @@ public class PauseMenu : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		if(screens.Count > 0)
-		{
-			screens.First().enabled = true;
-		}
     }
 
     // Update is called once per frame
@@ -66,24 +63,42 @@ public class PauseMenu : MonoBehaviour
         
     }
 
-	public void Toggle()
+	public void Toggle(string screenToToggleTitle = null)
 	{
-		if (this.enabled)
+		bool hide = this.enabled;
+		if(!string.IsNullOrEmpty(screenToToggleTitle) && this.activeScreen != null)
+		{
+			hide = this.activeScreen.Title == screenToToggleTitle;
+		}
+		if (hide)
 			this.Hide();
 		else
-			this.Show();
+			this.Show(screenToToggleTitle);
 	}
-	public void Show()
+	public void Show(string screenToShowTitle = null)
 	{
 		this.gameObject.SetActive(true);
 		this.enabled = true;
 		if (screens.Count > 0)
 		{
-			var firstScreen = screens.First();
-			firstScreen.Show();
+			var screenToShow = string.IsNullOrEmpty(screenToShowTitle) ? screens.First() : screens.Find(x => x.Title == screenToShowTitle);
+			if(screenToShow == null)
+				screenToShow = screens.First();
+			if(this.activeScreen != null && screenToShow != this.activeScreen)
+			{
+				this.activeScreen.Hide();
+			}
+			this.activeScreen = screenToShow;
+			screenToShow.Show();
 			if(this.ScreenTitle != null)
 			{
-				this.ScreenTitle.text = firstScreen.Title;
+				this.ScreenTitle.text = screenToShow.Title;
+			}
+
+			var allOtherScreens = this.screens.Where(x => x != screenToShow);
+			foreach(var screen in allOtherScreens)
+			{
+				screen.Hide();
 			}
 		}
 	}
@@ -91,5 +106,10 @@ public class PauseMenu : MonoBehaviour
 	{
 		this.enabled = false;
 		this.gameObject.SetActive(false);
+		if(this.activeScreen != null)
+		{
+			this.activeScreen.Hide();
+			this.activeScreen = null;
+		}
 	}
 }

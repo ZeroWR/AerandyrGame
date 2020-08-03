@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreensDefinitions:
   - {fileID: 7930218762908233368, guid: 19cc216cca9ee6e4fba32e936b19bc79, type: 3}
+  - {fileID: 1241165592037829405, guid: 785bf3e4d1fcd6f489c1688b36f3b341, type: 3}
   ScreenContainer: {fileID: 1293671738195744293}
   ScreenTitle: {fileID: 569858212605146124}
 --- !u!1 &1293671738195744297

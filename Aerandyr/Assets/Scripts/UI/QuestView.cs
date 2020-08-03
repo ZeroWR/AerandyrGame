@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using OneManEscapePlan.UIList.Scripts;
 
-public class QuestView: UIListItemViewBase<Quest>
+public class QuestView : UIListItemViewBase<Quest>
 {
 	[SerializeField] protected Text questNameText = null;
 	private void Start()

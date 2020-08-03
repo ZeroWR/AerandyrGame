@@ -43,7 +43,8 @@ public class IsoCharacterController : MonoBehaviour
 	public HUD HUDPrefab;
 	public PauseMenu PauseMenuPrefab;
 
-	private List<InventoryItem> Inventory { get; set; }
+	private List<InventoryItem> inventory = new List<InventoryItem>();
+	public ReadOnlyCollection<InventoryItem> Inventory { get { return inventory.AsReadOnly(); } }
 	#endregion
 
 	private void Awake()
@@ -76,7 +77,6 @@ public class IsoCharacterController : MonoBehaviour
 			this.pauseMenu.Controller = this;
 			this.pauseMenu.Hide();
 		}
-		Inventory = new List<InventoryItem>();
 	}
 
 	private void Update()
@@ -108,12 +108,16 @@ public class IsoCharacterController : MonoBehaviour
 		{
 			TogglePauseMenu();
 		}
+		if (Input.GetButtonDown("Inventory"))
+		{
+			ToggleInventory();
+		}
 	}
 
 	#region Pickups/Inventory
 	public bool CanPickUpItem(ItemDefinition itemDefinition, int quantity)
 	{
-		var existingInventoryItem = this.Inventory.Find(x => x.ItemDefintion.ID == itemDefinition.ID);
+		var existingInventoryItem = this.inventory.Find(x => x.ItemDefintion.ID == itemDefinition.ID);
 		if (existingInventoryItem == null)
 			return true;
 
@@ -121,14 +125,14 @@ public class IsoCharacterController : MonoBehaviour
 	}
 	public void PickupItem(ItemDefinition itemDefinition, int quantity)
 	{
-		var existingInventoryItem = this.Inventory.Find(x => x.ItemDefintion.ID == itemDefinition.ID);
+		var existingInventoryItem = this.inventory.Find(x => x.ItemDefintion.ID == itemDefinition.ID);
 		if(existingInventoryItem == null)
 		{
 			existingInventoryItem = new InventoryItem()
 			{
 				ItemDefintion = itemDefinition
 			};
-			Inventory.Add(existingInventoryItem);
+			inventory.Add(existingInventoryItem);
 		}
 		existingInventoryItem.Quantity += quantity;
 	}
@@ -200,6 +204,15 @@ public class IsoCharacterController : MonoBehaviour
 			return;
 
 		this.pauseMenu.Toggle();
+		this.HUD.gameObject.SetActive(!this.pauseMenu.enabled);
+		nextUIKeyDownTime = Time.time + 0.25f;
+	}
+	private void ToggleInventory()
+	{
+		if (!this.pauseMenu || !CanTogglePauseMenu)
+			return;
+
+		this.pauseMenu.Toggle("Inventory");
 		this.HUD.gameObject.SetActive(!this.pauseMenu.enabled);
 		nextUIKeyDownTime = Time.time + 0.25f;
 	}

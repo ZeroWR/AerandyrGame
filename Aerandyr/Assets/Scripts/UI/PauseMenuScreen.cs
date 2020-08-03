@@ -21,6 +21,14 @@ public class PauseMenuScreen : MonoBehaviour
 	{
 		this.controller = controller;
 	}
-	public virtual void Show() { this.enabled = true; }
-	public virtual void Hide() { this.enabled = false; }
+	public virtual void Show()
+	{
+		this.gameObject.SetActive(true);
+		this.enabled = true;
+	}
+	public virtual void Hide()
+	{
+		this.gameObject.SetActive(false);
+		this.enabled = false;
+	}
 }

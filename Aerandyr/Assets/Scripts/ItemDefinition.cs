@@ -21,6 +21,7 @@ public class ItemDefinition
 {
 	public int ID;
 	public string Name;
+	public string Description;
 	public ItemCategory ItemCategory;
 	public int MaxCarry;
 	public int MaxPerSlot;

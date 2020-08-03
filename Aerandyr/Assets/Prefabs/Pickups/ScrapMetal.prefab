@@ -112,6 +112,7 @@ MonoBehaviour:
   ItemDefinition:
     ID: 1
     Name: Scrap Metal
+    Description: Scraps of metal used in the crafting of weapons, armor, etc.
     ItemCategory: 0
     MaxCarry: -1
     MaxPerSlot: 50
