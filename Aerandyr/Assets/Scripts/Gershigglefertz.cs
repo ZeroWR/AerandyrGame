@@ -64,7 +64,7 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 		var isInPart2 = ourQuest.CurrentSection == ourQuest.Sections[2];
 		if (senderPlayer.CurrentQuest == ourQuest && !isInPart2)
 		{
-			senderPlayer.HUD.ShowDialog(new TransientDialog("Please talk to my brother."));
+			senderPlayer.ShowDialog(new TransientDialog("Please talk to my brother."));
 			return;
 		}
 		
@@ -73,7 +73,7 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 		if(isInPart2)
 			ourQuest.CurrentSection.Objectives[0].IsDone = true;
 
-		var dialogPlayer = senderPlayer.HUD.ShowDialog(dialogToPlay);
+		senderPlayer.ShowDialog(dialogToPlay);
 		HUD.DialogFinishedEventHandler dialogFinishedHandler = null;
 		dialogFinishedHandler = (s, dialog) =>
 		{

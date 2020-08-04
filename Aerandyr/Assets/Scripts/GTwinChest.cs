@@ -39,7 +39,7 @@ public class GTwinChest : Chest
 		var message = hasBeenOpened ? "This chest is empty." : "You got Gershigglefertz's item!";
 		var dialog = new TransientDialog(message);
 		if (hasBeenOpened)
-			this.sender.HUD.ShowDialog(dialog);
+			this.sender.ShowDialog(dialog);
 		else
 		{
 			this.sender.InventoryAcquiredNotification(dialog).ContinueWithOnMainThread

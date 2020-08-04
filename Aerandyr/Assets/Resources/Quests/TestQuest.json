@@ -1,5 +1,7 @@
 {
 	"Name": "Test Quest",
+	"Description": "Gershigglefertz needs you to retrieve an item from his twin brother.",
+	"Location": "Test Town",
 	"Sections": 
 	[
 		{
