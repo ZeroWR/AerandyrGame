@@ -1,7 +1,9 @@
 fileFormatVersion: 2
 guid: e0469bdd147c08a43b52b8ef9627dd78
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Buy_Table_0
+    21300002: Buy_Table_1
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -40,17 +42,17 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 37, y: 58, z: 37, w: 58}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -71,9 +73,57 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
-    outline: []
-    physicsShape: []
+    sprites:
+    - serializedVersion: 2
+      name: Buy_Table_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdf9ed2f71c55e044800b175bd9c4084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buy_Table_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6fa505cd03ca7442a6951d5d2028787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -27, y: 6}
+      - {x: -27, y: -6}
+      - {x: 27, y: -6}
+      - {x: 27, y: 6}
+    physicsShape:
+    - - {x: -27, y: 6}
+      - {x: -27, y: -6}
+      - {x: 27, y: -6}
+      - {x: 27, y: 6}
     bones: []
     spriteID: 00e69b243517adc45b74abcfbf876fa4
     vertices: []
