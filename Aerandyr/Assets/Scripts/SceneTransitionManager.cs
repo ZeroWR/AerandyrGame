@@ -24,10 +24,17 @@ public class SceneTransitionManager : MonoBehaviour
 		}
 	}
 
-	public void LoadScene(GameObject player, string sceneName, string spawnPoint = "Default")
+	public void LoadScene(GameObject player, string sceneName, string spawnPoint = "Default", SceneTransition transitionToGoBackTo = null)
 	{
 		var currentScene = SceneManager.GetActiveScene();
 		UnityEngine.Events.UnityAction<Scene, LoadSceneMode> callback = null;
+		bool setTransition = transitionToGoBackTo != null;
+		string goBackToSpawnPoint = null, goBackToScene = null;
+		if (setTransition)
+		{
+			goBackToSpawnPoint = transitionToGoBackTo.SpawnPoint.Name;
+			goBackToScene = currentScene.name;
+		}
 		callback = (scene, loadSceneMode) =>
 		{
 			SceneManager.sceneLoaded -= callback;
@@ -42,6 +49,16 @@ public class SceneTransitionManager : MonoBehaviour
 			var targetSpawnPoint = spawnPoints.FirstOrDefault(x => x.Name == spawnPoint);
 			var spawnPointToSpawnAt = targetSpawnPoint != null ? targetSpawnPoint : spawnPoints.First();
 			player.transform.position = spawnPointToSpawnAt.transform.position;
+
+			if(setTransition)
+			{
+				var currentTransition = targetSpawnPoint.GetComponentInParent<SceneTransition>();
+				if(currentTransition != null)
+				{
+					currentTransition.SceneChangeTrigger.SceneToChangeTo = goBackToScene;
+					currentTransition.SceneChangeTrigger.TargetSpawnPoint = goBackToSpawnPoint;
+				}
+			}
 
 			var cameras = FindObjectsOfType<BasicCameraFollow>();
 			if (cameras.Length != 0)

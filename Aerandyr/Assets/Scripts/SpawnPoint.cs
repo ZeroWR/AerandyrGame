@@ -9,12 +9,13 @@ public class SpawnPoint : MonoBehaviour
 
 	public readonly static string DefaultName = "Default";
 
+	public SpriteRenderer Sprite;
+
 	private void Awake()
 	{
-		var sprites = GetComponentsInParent<SpriteRenderer>();
-		foreach(var sprite in sprites)
+		if(Sprite != null)
 		{
-			sprite.enabled = false;
+			Sprite.enabled = false;
 		}
 	}
 }

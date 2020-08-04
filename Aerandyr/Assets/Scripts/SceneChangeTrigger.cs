@@ -20,6 +20,6 @@ public class SceneChangeTrigger : MonoBehaviour
 			return;
 		}
 
-		SceneTransitionManager.Instance.LoadScene(playerController.gameObject, SceneToChangeTo, TargetSpawnPoint);
+		SceneTransitionManager.Instance.LoadScene(playerController.gameObject, SceneToChangeTo, TargetSpawnPoint, this.GetComponentInParent<SceneTransition>());
 	}
 }

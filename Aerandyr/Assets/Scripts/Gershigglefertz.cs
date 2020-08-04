@@ -73,7 +73,6 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 		if(isInPart2)
 			ourQuest.CurrentSection.Objectives[0].IsDone = true;
 
-		senderPlayer.ShowDialog(dialogToPlay);
 		HUD.DialogFinishedEventHandler dialogFinishedHandler = null;
 		dialogFinishedHandler = (s, dialog) =>
 		{
@@ -91,6 +90,7 @@ public class Gershigglefertz : MonoBehaviour, IInteractable
 			senderPlayer.HUD.DialogFinished -= dialogFinishedHandler;
 		};
 		senderPlayer.HUD.DialogFinished += dialogFinishedHandler;
+		senderPlayer.ShowDialog(dialogToPlay);
 	}
 	public bool CanInteract(Object sender)
 	{
