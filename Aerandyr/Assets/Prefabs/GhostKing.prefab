@@ -94,11 +94,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4496507840332823822}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -191,6 +191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WorldSpaceHealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826810066202041378, guid: 904c5dfd4ec66e740a02622bd9d86b7c,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7928785617917360093, guid: 904c5dfd4ec66e740a02622bd9d86b7c,
         type: 3}
@@ -306,11 +311,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5826810066202041378, guid: 904c5dfd4ec66e740a02622bd9d86b7c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904c5dfd4ec66e740a02622bd9d86b7c, type: 3}
