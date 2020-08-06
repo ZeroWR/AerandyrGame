@@ -343,9 +343,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: Inventory
-  inventorySlotSelectionManager: {fileID: 8363350431359451144}
+  inventorySlotSelectionManager: {fileID: 8776720313232770671}
   inventoryItemDetails: {fileID: 1619995779350791722}
-  inventoryItemsController: {fileID: 3357240459020069847}
+  inventoryItemsController: {fileID: 706980920842082596}
 --- !u!1 &5864010913237816618
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,9 +358,9 @@ GameObject:
   - component: {fileID: 5864010913237816597}
   - component: {fileID: 5864010913237816598}
   - component: {fileID: 5864010913237816599}
-  - component: {fileID: 5864010913237816616}
-  - component: {fileID: 3357240459020069847}
-  - component: {fileID: 8363350431359451144}
+  - component: {fileID: 2334466242473759601}
+  - component: {fileID: 706980920842082596}
+  - component: {fileID: 8776720313232770671}
   m_Layer: 5
   m_Name: ItemsGrid
   m_TagString: Untagged
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5864010913237816616
+--- !u!114 &2334466242473759601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5864010913237816618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 90b3b576158fc6c429ff32d9faabcbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &3357240459020069847
+--- !u!114 &706980920842082596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -486,7 +486,7 @@ MonoBehaviour:
   prefab: {fileID: 5685049418568173668, guid: 6b6d6d38e3dc6e74d9073dadf6f18a9d, type: 3}
   maxPoolSize: 0
   startingPoolSize: 0
---- !u!114 &8363350431359451144
+--- !u!114 &8776720313232770671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

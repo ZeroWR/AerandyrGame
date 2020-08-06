@@ -86,8 +86,11 @@ public class IsoCharacterController : MonoBehaviour
 			//Forward keypress here, or do in HUD?
 			this.HUD.ProcessInput();
 		}
-		else if(!isInCutscene)
+		else if (!isInCutscene)
 			ProcessInput();
+
+		if (this.IsInUI)
+			this.pauseMenu.ProcessInput();
 
 		if (!this.canMove && this.nextCanMoveTime <= Time.time)
 		{
@@ -96,13 +99,16 @@ public class IsoCharacterController : MonoBehaviour
 	}
 	private void ProcessInput()
 	{
-		if (Input.GetKeyDown(KeyCode.E))
+		if(!this.IsInUI)
 		{
-			DoUse();
-		}
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			DoAttack();
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				DoUse();
+			}
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				DoAttack();
+			}
 		}
 		if(Input.GetButtonDown("Pause"))
 		{
@@ -125,16 +131,26 @@ public class IsoCharacterController : MonoBehaviour
 	}
 	public void PickupItem(ItemDefinition itemDefinition, int quantity)
 	{
-		var existingInventoryItem = this.inventory.Find(x => x.ItemDefintion.ID == itemDefinition.ID);
-		if(existingInventoryItem == null)
+		//var existingInventoryItem = this.inventory.FirstOrDefault(x => x.ItemDefintion.ID == itemDefinition.ID);
+		//if (existingInventoryItem == null)
+		//{
+		//	existingInventoryItem = new InventoryItem()
+		//	{
+		//		ItemDefintion = itemDefinition
+		//	};
+		//	inventory.Add(existingInventoryItem);
+		//}
+		//existingInventoryItem.Quantity += quantity;
+		for (int i = 1; i <= 20; ++i)
 		{
-			existingInventoryItem = new InventoryItem()
+			var existingInventoryItem = new InventoryItem()
 			{
-				ItemDefintion = itemDefinition
+				ItemDefintion = itemDefinition,
+				Quantity = i
 			};
 			inventory.Add(existingInventoryItem);
 		}
-		existingInventoryItem.Quantity += quantity;
+		
 	}
 	#endregion
 
@@ -151,13 +167,14 @@ public class IsoCharacterController : MonoBehaviour
 	}
 	#endregion
 
-	#region Dialog/HUD
+	#region Dialog/HUD/UI
 	public void ShowDialog(Dialog dialog)
 	{
 		this.rbody.velocity = Vector2.zero;
 		this.HUD.ShowDialog(dialog);
 	}
 	private bool IsInDialog { get { return this.HUD != null && this.HUD.IsInDialog; } }
+	private bool IsInUI { get { return this.pauseMenu != null && this.pauseMenu.enabled; } }
 	public Task<bool> InventoryAcquiredNotification(Dialog dialog)
 	{
 		if (this.isInCutscene)
@@ -233,7 +250,7 @@ public class IsoCharacterController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		if (this.IsInDialog || !this.canMove)
+		if (this.IsInDialog || !this.canMove || this.IsInUI)
 			return;
 		Vector2 currentPos = rbody.position;
 		float horizontalInput = Input.GetAxis("Horizontal");

@@ -240,6 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quantityText: {fileID: 9109108832905864333}
   itemImage: {fileID: 7412569430888045363}
+  borderImage: {fileID: 6754449111443729420}
+  SelectionColor: {r: 1, g: 0, b: 0.83446693, a: 1}
 --- !u!114 &5337858655847536355
 MonoBehaviour:
   m_ObjectHideFlags: 0

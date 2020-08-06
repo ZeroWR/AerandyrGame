@@ -28,6 +28,62 @@ namespace OneManEscapePlan.UIList.Scripts {
 	public abstract class UIListController<ItemModel, ItemView> : AbstractUIListController<ItemModel, ItemView, List<ItemView>> where ItemView : UIListItemViewBase<ItemModel> {
 
 		#region FIELDS
+		public int Rows
+		{
+			get
+			{
+				var layoutGroup = this.GetComponent<LayoutGroup>();
+				if (!layoutGroup)
+					return -1;
+
+				if(layoutGroup is HorizontalLayoutGroup)
+				{
+					return 1;
+				}
+				if(layoutGroup is VerticalLayoutGroup)
+				{
+					return this.itemModels.Count;
+				}
+				if(layoutGroup is GridLayoutGroup)
+				{
+					//No fucking idea.  No way to determine column and row count
+				}
+				if(layoutGroup is GridLayoutGroupExtended)
+				{
+					var grid = layoutGroup as GridLayoutGroupExtended;
+					return grid.Rows;
+				}
+				return -1;
+			}
+		}
+		public int Columns
+		{
+			get
+			{
+				var layoutGroup = this.GetComponent<LayoutGroup>();
+				if (!layoutGroup)
+					return -1;
+
+				if (layoutGroup is HorizontalLayoutGroup)
+				{
+					return this.itemModels.Count;
+				}
+				if (layoutGroup is VerticalLayoutGroup)
+				{
+					return 1;
+				}
+				if (layoutGroup is GridLayoutGroup)
+				{
+					//No fucking idea.  No way to determine column and row count
+				}
+				if (layoutGroup is GridLayoutGroupExtended)
+				{
+					var grid = layoutGroup as GridLayoutGroupExtended;
+					return grid.Columns;
+				}
+				return -1;
+			}
+		}
 		#endregion
 
 		/// <summary>

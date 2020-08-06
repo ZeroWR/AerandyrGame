@@ -62,7 +62,11 @@ public class PauseMenu : MonoBehaviour
     {
         
     }
-
+	public void ProcessInput()
+	{
+		if(this.activeScreen != null && this.activeScreen.CanProcessInput)
+			this.activeScreen.ProcessInput();
+	}
 	public void Toggle(string screenToToggleTitle = null)
 	{
 		bool hide = this.enabled;
