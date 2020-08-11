@@ -131,26 +131,27 @@ public class IsoCharacterController : MonoBehaviour
 	}
 	public void PickupItem(ItemDefinition itemDefinition, int quantity)
 	{
-		//var existingInventoryItem = this.inventory.FirstOrDefault(x => x.ItemDefintion.ID == itemDefinition.ID);
-		//if (existingInventoryItem == null)
-		//{
-		//	existingInventoryItem = new InventoryItem()
-		//	{
-		//		ItemDefintion = itemDefinition
-		//	};
-		//	inventory.Add(existingInventoryItem);
-		//}
-		//existingInventoryItem.Quantity += quantity;
-		for (int i = 1; i <= 20; ++i)
+		var existingInventoryItem = this.inventory.FirstOrDefault(x => x.ItemDefintion.ID == itemDefinition.ID);
+		if (existingInventoryItem == null)
 		{
-			var existingInventoryItem = new InventoryItem()
+			existingInventoryItem = new InventoryItem()
 			{
-				ItemDefintion = itemDefinition,
-				Quantity = i
+				ItemDefintion = itemDefinition
 			};
 			inventory.Add(existingInventoryItem);
 		}
-		
+		existingInventoryItem.Quantity += quantity;
+
+		//For testing inventory screen:
+		//for (int i = 1; i <= 20; ++i)
+		//{
+		//	var existingInventoryItem = new InventoryItem()
+		//	{
+		//		ItemDefintion = itemDefinition,
+		//		Quantity = i
+		//	};
+		//	inventory.Add(existingInventoryItem);
+		//}
 	}
 	#endregion
 
