@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using XNode;
 
 public class InventoryItem
 {
@@ -171,7 +172,7 @@ public class IsoCharacterController : MonoBehaviour
 	#region Dialog/HUD/UI
 	public void ShowDialog(Dialog dialog)
 	{
-		this.rbody.velocity = Vector2.zero;
+		StopMovement();
 		this.HUD.ShowDialog(dialog);
 	}
 	private bool IsInDialog { get { return this.HUD != null && this.HUD.IsInDialog; } }
@@ -220,7 +221,7 @@ public class IsoCharacterController : MonoBehaviour
 	{
 		if (!this.pauseMenu || !CanTogglePauseMenu)
 			return;
-
+		StopMovement();
 		this.pauseMenu.Toggle();
 		this.HUD.gameObject.SetActive(!this.pauseMenu.enabled);
 		nextUIKeyDownTime = Time.time + 0.25f;
@@ -229,7 +230,7 @@ public class IsoCharacterController : MonoBehaviour
 	{
 		if (!this.pauseMenu || !CanTogglePauseMenu)
 			return;
-
+		StopMovement();
 		this.pauseMenu.Toggle("Inventory");
 		this.HUD.gameObject.SetActive(!this.pauseMenu.enabled);
 		nextUIKeyDownTime = Time.time + 0.25f;
@@ -298,7 +299,10 @@ public class IsoCharacterController : MonoBehaviour
 		if (shouldBeWalking != animationController.IsWalking)
 			animationController.IsWalking = shouldBeWalking;
 	}
-
+	private void StopMovement()
+	{
+		rbody.velocity = Vector2.zero;
+	}
 	#endregion
 
 	#region Use
