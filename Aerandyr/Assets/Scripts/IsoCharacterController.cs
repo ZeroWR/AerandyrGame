@@ -180,6 +180,7 @@ public class IsoCharacterController : MonoBehaviour
 	{
 		if (this.isInCutscene)
 			return Task.FromResult(false);
+			
 		var tcs = new TaskCompletionSource<bool>();
 		this.isInCutscene = true;
 		this.animationController.IsFacingForwards = true;
@@ -251,7 +252,7 @@ public class IsoCharacterController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		if (this.IsInDialog || !this.canMove || this.IsInUI)
+		if (this.IsInDialog || !this.canMove || this.IsInUI || this.isInCutscene)
 			return;
 		Vector2 currentPos = rbody.position;
 		float horizontalInput = Input.GetAxis("Horizontal");
